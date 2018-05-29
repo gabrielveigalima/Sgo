@@ -46,7 +46,7 @@
         <form class="form-signin">
 
           <img class="img-responsive center-block" src="img/logo_bsm.png">
-          <h3 class="form-signin-heading text-center">Esqueceu a senha </h3>
+          <h3 class="form-signin-heading text-center">Esqueceu a senha</h3>
           <label for="inputEmail" class="sr-only">Email</label>
           <input type="email" id="inputEmail" class="form-control" placeholder="Digite seu email..." required autofocus>
           
