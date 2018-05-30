@@ -12,10 +12,10 @@ import model.User;
  * @author gabriel.lima
  */
 public class UserDAO {
-     public boolean cadastrar(Cliente cliente) {
+     public boolean cadastrar(User user) {
         String sqlPessoa = "insert into pessoa value(null,?,?,?,?,?,?,?);";
         String sqlCliente = "insert into cliente value(null,current_date(),?,?);";
-
+/*
         try {
 
             
@@ -23,9 +23,9 @@ public class UserDAO {
             //Cadastra Pessoa
             getConnection();
             stman = connection.prepareStatement(sqlPessoa);
-            stman.setString(1, cliente.getNome());
-            stman.setString(3, cliente.getEmail());
-            stman.setString(4, cliente.getPws());
+            stman.setString(1, user.getNome());
+            stman.setString(3, user.getEmail());
+            stman.setString(4, user.getPws());
             stman.execute();
             stman.close();
 
@@ -43,8 +43,8 @@ public class UserDAO {
             stman = connection.prepareStatement(sqlCliente);
             //Calendar dtc = Calendar.getInstance();
             //stman.setDate(1, new java.sql.Date(dtc.getTime()));
-            stman.setBoolean(1, cliente.isAtivo());
-            stman.setLong(2, cliente.getIdPessoa());
+            stman.setBoolean(1, user.isAtivo());
+            stman.setLong(2, user.getIdPessoa());
             stman.execute();
             stman.close();
 
@@ -53,7 +53,7 @@ public class UserDAO {
             System.out.println("Erro ao Cadastrar: " + ex.toString());
         } finally {
             close();
-        }
+        } */
 
         return false;
     }
