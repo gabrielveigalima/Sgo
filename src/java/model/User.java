@@ -10,12 +10,27 @@ package model;
  * @author gabriel.lima
  */
 public class User {
-    private String name, email, password, status, tipo;  
- 
+    private String name, email, password, status, nivel, idUser, nomeCompleto;  
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
 
     public User() {
     }
 
+    public String getIdUser() {
+        return idUser;
+    }
+    
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+    
     public String getName() {
         return name;
     }
@@ -32,12 +47,12 @@ public class User {
         this.email = email;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getNivel() {
+        return nivel;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setNivel(String tipo) {
+        this.nivel = tipo;
     }
     
     public String getPassword() {
@@ -54,8 +69,5 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-    
-    
-    
+    }    
 }

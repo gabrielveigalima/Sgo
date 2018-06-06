@@ -16,6 +16,7 @@ public class CtrlUser {
     
     public boolean cadastrarUser(User user) {
         UserDAO pessoaDAO = new UserDAO();
-        return pessoaDAO.cadastrar(user);
+        //return pessoaDAO.cadastrar(user);
+        return true;
     } 
 }

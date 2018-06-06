@@ -4,12 +4,10 @@
     Author     : gabriel.lima
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.ConexaoDAO"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%=ConexaoDAO.conecta()%>
-
-<!--
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -34,21 +32,23 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   </head>
 
-  <body>
-
+  <body>      
     <div class="container">
         <h2 class="form-signin-heading text-center">Sistema de Gestão Operacional</h2>
         <h1>
-        
+        <c:if test="${not empty sessionScope.msg}">
+            ${sessionScope.msg}
+        </c:if>
         </h1>
-        <form class="form-signin">
+        <form action="valida.jsp" method="post" class="form-signin">
 
           <img class="img-responsive center-block" src="img/logo_bsm.png">
+          <input type="hidden" value="login" name="action">
           <h3 class="form-signin-heading text-center">Login </h3>
           <label for="inputEmail" class="sr-only">Email</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Digite seu email..." required autofocus>
+          <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Digite seu email..." required autofocus>
           <label for="inputPassword" class="sr-only">Senha</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Digite sua senha..." required>
+          <input type="password" name="pws" id="inputPassword" class="form-control" placeholder="Digite sua senha..." required>
 
           <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar <samp class="glyphicon glyphicon-log-in"></samp></button>
           
@@ -57,8 +57,8 @@
     </div> <!-- /container -->
 
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/docs/3.3/../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
--->
+  

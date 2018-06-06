@@ -5,60 +5,56 @@
  */
 package DAO;
 
-import model.User;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import model.User;
+
 /**
  *
  * @author gabriel.lima
  */
-public class UserDAO {
+public class AdminDAO {
     Connection con =  new ConexaoDAO().conecta();
     Statement stmt;
     PreparedStatement ps;
+    public User selectFiltro(User u){
+        
+        
+        return u;
+    }
+     
+    public ResultSet select(){
+        User u = new User();
+        ResultSet rs;
+        try{
+            String sql = "SELECT * FROM tblUser";
+            ps = con.prepareStatement(sql);       
 
-    
-    public User login(User u){
-    String email = u.getEmail();
-    String pws = u.getPassword();            
-    try{
-        String sql = "SELECT * FROM tblUser WHERE email=? and password=?";
-        ps = con.prepareStatement(sql);        
-        ps.setString(1, email);
-        ps.setString(2, pws);        
-        ResultSet rs = ps.executeQuery();
-        if(rs.next()){   
-            u.setIdUser(rs.getString("idUser"));
-            u.setName(rs.getString("nome"));
-            u.setNivel(rs.getString("nivel"));
-            u.setStatus(rs.getString("status"));
-            u.setStatus(rs.getString("status"));
+            rs = ps.executeQuery();
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+            System.err.println("Erro ao logar: "+e.toString());
+            rs = null;
         }
-    }catch (SQLException e){
-        e.printStackTrace();
-        System.err.println("Erro ao logar: "+e.toString());
-        u = null;
-    }
-    return u;
+        return rs;
     }
     
-    
-     public boolean cadastrar() throws SQLException {
-        String sql = "insert into pessoa value(null,?,?,?,?,?,?,?);";
+    public boolean cadastroUser(User u) throws SQLException{
         String query = ("insert into tblUser (nome,nivel,email,password,status,nomeCompleto) "+
                 "values(?,?,?,?,?,?)"); 
             
             //Cadastra usuario
             ps = con.prepareStatement(query);
-            ps.setString(1, "Gabriel");
-            ps.setString(2, "1");
-            ps.setString(3, "gabriel.lima@bsm.com.br");
-            ps.setString(2, "123");
+            ps.setString(1, u.getName());
+            ps.setString(2, u.getNivel());
+            ps.setString(3, u.getEmail());
+            ps.setString(2, u.getPassword());
             ps.setString(3, "1");
-            ps.setString(2, "Gabriel Veiga Lima");
+            ps.setString(2, u.getNomeCompleto());
            
 
             //Busca Pessoa
@@ -82,6 +78,5 @@ public class UserDAO {
             System.out.println("Erro ao Cadastrar: " + ex.toString());
             return false;
         }  
-        
     }
 }
