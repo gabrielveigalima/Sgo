@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import model.User;
 
 /**
@@ -44,8 +46,10 @@ public class AdminDAO {
     }
     
     public boolean cadastroUser(User u) throws SQLException{
-        String query = ("insert into tblUser (nome,nivel,email,password,status,nomeCompleto) "+
-                "values(?,?,?,?,?,?)"); 
+        String query = ("insert into tblUser (nome,nivel,email,password,status,nomeCompleto,dateCreate,UserCreate) "+
+                "values(?,?,?,?,?,?,?,?)"); 
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
             
             //Cadastra usuario
             ps = con.prepareStatement(query);
@@ -54,6 +58,8 @@ public class AdminDAO {
             ps.setString(3, u.getEmail());
             ps.setString(2, u.getPassword());
             ps.setString(3, "1");
+            ps.setString(2, u.getNomeCompleto());
+            ps.setString(2, timeStamp);
             ps.setString(2, u.getNomeCompleto());
            
 
