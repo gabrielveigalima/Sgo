@@ -10,8 +10,19 @@
         <title>Cadastrar Usuário - admin - SGO</title>
     </head>
     <body>
+        <c:import url="navbar.jsp"></c:import> 
         <div class="container">
+            <h1>
+                <c:if test="${not empty sessionScope.msg}">
+                    ${sessionScope.msg}
+                </c:if>
+            </h1>
             <form method="post" action="sql.jsp">
+                <div class='bg-danger'>
+                    <h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>
+                        NÃO PODE USAR ACENTO!
+                    </h4>
+                </div><br>
                 <h1 class='text-center'>Cadastro de Usuário</h1> 
                 <input type="hidden" name="action" value='cad'>
                 <div class="form-group">
@@ -35,7 +46,7 @@
                 </div>
                 <div class="form-group">
                   <label for="InputNomeC">Nome completo</label>
-                  <input name="nomeC" required type="email" class="form-control" id="InputNomeC" placeholder="Nome completo">
+                  <input name="nomeC" required type="text" class="form-control" id="InputNomeC" placeholder="Nome completo">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Enviar</button>

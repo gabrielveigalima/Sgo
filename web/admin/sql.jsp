@@ -4,6 +4,7 @@
     Author     : gabriel.lima
 --%>
 
+<%@page import="java.text.Normalizer"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="DAO.AdminDAO"%>
 <%@page import="model.User"%>
@@ -61,25 +62,32 @@ if(action.equals("select")){
      //Redireciona a página 
 
 }else if(action.equals("cad")){
-    name = request.getParameter("nome");
-    email = request.getParameter("email");
-    nivel = request.getParameter("nivel");
-    pws = request.getParameter("pws");
-    nomeC = request.getParameter("nomeC");
+    name = Normalizer.normalize(request.getParameter("nome"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        toUpperCase();
+    email = Normalizer.normalize(request.getParameter("email"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        toLowerCase();
+    nivel = Normalizer.normalize(request.getParameter("nivel"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+    pws = Normalizer.normalize(request.getParameter("pws"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+    nomeC = Normalizer.normalize(request.getParameter("nomeC"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toUpperCase();
     
         //Verifa se alguns dos campos estão fazios 
         if(name.equals("") || email.equals("") || pws.equals("") || nivel.equals("") || nomeC.equals("")){
             msg = "<div class='bg-success'><h4 class'text-center'>Preencha todos os campos</h4></div>";
         }else{
-             //Instacia a classe e seta os objetos 
-            
+             //Instacia a classe e seta os objetos             
             c.setName(name);
             c.setEmail(email);
             c.setPassword(pws);
             c.setNivel(nivel);
             c.setNomeCompleto(nomeC);
+            String id = sessao.getAttribute("id").toString();
             //Verifca se cadastrou 
-            if(dao.cadastroUser(c)){
+            if(dao.cadastroUser(c,id)){
                      msg = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Cadastro realizado com sucesso.</h4></div><br>";
                 }else{
                     msg = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Erro ao cadastrar usuário.</h4></div><br>"; 
@@ -88,6 +96,9 @@ if(action.equals("select")){
         
    //Cria a sessão da mensagem 
     sessao.setAttribute("msg", msg);
-
+    %>
+        <c:redirect url="cadUser.jsp"></c:redirect>
+    <%
         
 }
+%>

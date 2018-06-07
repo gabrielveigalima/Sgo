@@ -33,10 +33,8 @@ public class AdminDAO {
         ResultSet rs;
         try{
             String sql = "SELECT * FROM tblUser";
-            ps = con.prepareStatement(sql);       
-
+            ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            
         }catch (SQLException e){
             e.printStackTrace();
             System.err.println("Erro ao logar: "+e.toString());
@@ -45,41 +43,28 @@ public class AdminDAO {
         return rs;
     }
     
-    public boolean cadastroUser(User u) throws SQLException{
-        String query = ("insert into tblUser (nome,nivel,email,password,status,nomeCompleto,dateCreate,UserCreate) "+
-                "values(?,?,?,?,?,?,?,?)"); 
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-
+    public boolean cadastroUser(User u, String id) throws SQLException{
+        String query = ("insert into tblUser (nome,nivel,email,password,status,nomeCompleto,dateCreate,UserCreate,loginLast) "+
+                "values(?,?,?,?,?,?,?,?,NULL)"); 
+            String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
             
             //Cadastra usuario
             ps = con.prepareStatement(query);
             ps.setString(1, u.getName());
             ps.setString(2, u.getNivel());
             ps.setString(3, u.getEmail());
-            ps.setString(2, u.getPassword());
-            ps.setString(3, "1");
-            ps.setString(2, u.getNomeCompleto());
-            ps.setString(2, timeStamp);
-            ps.setString(2, u.getNomeCompleto());
+            ps.setString(4, u.getPassword());
+            ps.setString(5, "1");
+            ps.setString(6, u.getNomeCompleto());
+            ps.setString(7, timeStamp);
+            ps.setString(8, id);
            
-
-            //Busca Pessoa
-            //stmt = con.createStatement();
-            //ResultSet rs = null;
         try {
-            
-            
             if (ps.executeUpdate()==1){
                 return true;
             }else{
                 return false;
             }
-            //rs = stmt.executeQuery(query);
-            //stmt = con.prepareStatement(query);
-            
-            
-            //stmt.close();
-            
         } catch (Exception ex) {
             System.out.println("Erro ao Cadastrar: " + ex.toString());
             return false;
