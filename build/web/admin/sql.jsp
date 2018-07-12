@@ -4,9 +4,10 @@
     Author     : gabriel.lima
 --%>
 
+<%@page import="controller.CtrlUser"%>
+<%@page import="DAO.UserDAO"%>
 <%@page import="java.text.Normalizer"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="DAO.AdminDAO"%>
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,88 +18,86 @@ HttpSession sessao = request.getSession();
 //Pega a ação que será realizada 
 String action = request.getParameter("action");
 String msg = "";
-AdminDAO dao = new  AdminDAO();
+
+CtrlUser ctrl = new CtrlUser();
 User c = new User();  
-String name,email,nivel,pws,nomeC;
+String name,email,nivel,pws,nomeC,status,id,redefinir;
 
-//Verifica se a ação é para logar usuário
-if(action.equals("select")){
-    //Pega os dados do formulário 
-    if(!request.getParameter("email").equals("")){
-        email = request.getParameter("email");
-        c.setEmail(email);
-    }else if(!request.getParameter("name").equals("")){
-        name = request.getParameter("name");
-        c.setName(name);
-    }else if(!request.getParameter("nivel").equals("")){
-        nivel = request.getParameter("nivel");
-        c.setNivel(nivel);
-    }  
-    //Verifca se cadastrou 
-    User u = dao.selectFiltro(c);
-    if(u != null){
-        msg = u.toString();
-        msg = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Login realizado com sucesso.</h4></div><br>";
-        session.setAttribute("user", u.getName());
-        session.setAttribute("id", u.getIdUser());
-        session.setAttribute("nivel", u.getNivel());
-        if(u.getNivel().toString().equals("1")){//Verifica se o nivel é de admin
-            %>
-                <c:redirect url="admin/index.jsp"></c:redirect>
-            <% 
-        }else if(u.getNivel().toString().equals("2")){
-            %>
-                <c:redirect url="job/index.jsp"></c:redirect>
-            <%
-        }                            
-    }else{
-        msg = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Erro ao logar usuário.</h4></div><br>"; 
-        %>
-            <c:redirect url="index.jsp"></c:redirect>
-        <% 
+if(action.equals("edit")){
+    name = Normalizer.normalize(request.getParameter("nome"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        replaceAll(" ", "").toUpperCase();
+    email = Normalizer.normalize(request.getParameter("email"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        toLowerCase();
+    status = Normalizer.normalize(request.getParameter("status"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+    nivel = Normalizer.normalize(request.getParameter("nivel"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+    nomeC = Normalizer.normalize(request.getParameter("nomeC"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toUpperCase();
+    id = Normalizer.normalize(request.getParameter("id"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        replaceAll(" ", "");
+    if(request.getParameter("redefinir") != null){
+        redefinir = request.getParameter("redefinir");
+    
+        c.setPassword(redefinir);
     }
-   //Cria a sessão da mensagem 
-    sessao.setAttribute("msg", msg);
-     //Redireciona a página 
+    
+    if(name.equals("") || status.equals("") || email.equals("") || id.equals("") || nivel.equals("") || nomeC.equals("")){
+        msg = "<div class='bg-danger'><h4 class'text-center'>Preencha todos os campos</h4></div>";
+    }else{
+         //Instacia a classe e seta os objetos    
+        c.setIdUser(id);
+        c.setName(name);
+        c.setEmail(email);
+        c.setNivel(nivel);
+        c.setStatus(status);   
+        c.setNomeCompleto(nomeC);
+        
+        //Verifca se cadastrou 
+        msg = ctrl.editarUser(c);
+    }
 
+//Cria a sessão da mensagem 
+sessao.setAttribute("msg", msg);
+%>
+    <c:redirect url="user.jsp"></c:redirect>
+<%
 }else if(action.equals("cad")){
     name = Normalizer.normalize(request.getParameter("nome"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
-        toUpperCase();
+        replaceAll(" ", "").toUpperCase();
     email = Normalizer.normalize(request.getParameter("email"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
         toLowerCase();
     nivel = Normalizer.normalize(request.getParameter("nivel"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-    pws = Normalizer.normalize(request.getParameter("pws"), 
-        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
     nomeC = Normalizer.normalize(request.getParameter("nomeC"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toUpperCase();
     
+    
         //Verifa se alguns dos campos estão fazios 
-        if(name.equals("") || email.equals("") || pws.equals("") || nivel.equals("") || nomeC.equals("")){
-            msg = "<div class='bg-success'><h4 class'text-center'>Preencha todos os campos</h4></div>";
+        if(name.equals("") || email.equals("") || nivel.equals("") || nomeC.equals("")){
+            msg = "<div class='bg-danger'><h4 class'text-center'>Preencha todos os campos</h4></div>";
         }else{
-             //Instacia a classe e seta os objetos             
+
+            //Instacia a classe e seta os objetos             
             c.setName(name);
             c.setEmail(email);
-            c.setPassword(pws);
             c.setNivel(nivel);
             c.setNomeCompleto(nomeC);
-            String id = sessao.getAttribute("id").toString();
+            String idUser = sessao.getAttribute("id").toString();
             //Verifca se cadastrou 
-            if(dao.cadastroUser(c,id)){
-                     msg = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Cadastro realizado com sucesso.</h4></div><br>";
-                }else{
-                    msg = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Erro ao cadastrar usuário.</h4></div><br>"; 
-                }
+            
+            msg = ctrl.cadastrarUser(c,idUser);
         }
         
    //Cria a sessão da mensagem 
     sessao.setAttribute("msg", msg);
     %>
         <c:redirect url="cadUser.jsp"></c:redirect>
-    <%
-        
+    <%  
 }
 %>

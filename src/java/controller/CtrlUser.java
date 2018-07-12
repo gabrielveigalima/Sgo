@@ -6,6 +6,8 @@
 package controller;
 
 import DAO.UserDAO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.User;
 
 /**
@@ -13,10 +15,21 @@ import model.User;
  * @author gabriel.lima
  */
 public class CtrlUser {
+    UserDAO pessoaDAO = new UserDAO();
+    public String cadastrarUser(User user, String id) throws SQLException {
+        
+        return pessoaDAO.cadastroUser(user, id);
+    }
     
-    public boolean cadastrarUser(User user) {
-        UserDAO pessoaDAO = new UserDAO();
-        //return pessoaDAO.cadastrar(user);
-        return true;
-    } 
+    public String editarUser(User user){
+        return pessoaDAO.editUser(user);
+    }
+    
+    public ResultSet selecionar(){
+        return pessoaDAO.select();
+    }
+    
+    public ResultSet selecionarFiltro(User user) throws SQLException{
+        return pessoaDAO.selectFiltro(user);
+    }
 }

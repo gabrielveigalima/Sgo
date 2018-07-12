@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="seguranca.jsp"></c:import>
+
 <c:import url="head.jsp"></c:import>
         <title>Cadastrar Usuário - admin - SGO</title>
     </head>
@@ -15,6 +17,10 @@
             <h1>
                 <c:if test="${not empty sessionScope.msg}">
                     ${sessionScope.msg}
+                    <%
+                        HttpSession sessao = request.getSession();
+                        sessao.setAttribute("msg", null);
+                    %>
                 </c:if>
             </h1>
             <form method="post" action="sql.jsp">
@@ -41,15 +47,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                  <label for="InputSenha">Senha</label>
-                  <input name="pws" required type="password" class="form-control" id="InputSenha" placeholder="Senha">
-                </div>
-                <div class="form-group">
                   <label for="InputNomeC">Nome completo</label>
                   <input name="nomeC" required type="text" class="form-control" id="InputNomeC" placeholder="Nome completo">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
-        </div>
+        </div><br><br>
 <c:import url="footer.jsp"></c:import>

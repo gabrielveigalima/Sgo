@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -19,15 +21,23 @@
         <ul class="nav navbar-nav">
           <li><a href="index.jsp">Home</a></li>
           <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="cadUser.jsp">Cadastrar</a></li>
-            <li><a href="user.jsp">Manipular</a></li>
+            <li><a href="cadColaborador.jsp">Colaborador</a></li>
+            <li><a href="cadCentroCusto.jsp">Centro de custo</a></li>
+            <li><a href="cadEquipamento.jsp">Equipamento</a></li>
           </ul>
         </li>
         </ul>
         <ul class='nav navbar-nav navbar-right'>
-            <li><a href="sair.jsp">Sair</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">OLÁ, <c:if test="${not empty sessionScope.user}">
+                ${sessionScope.user}
+            </c:if> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="sair.jsp">Sair</a></li>
+                </ul>
+            </li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

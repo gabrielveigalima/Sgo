@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gabriel.lima/Documents/NetBeansProjects/Sgo/src/java/DAO/UserDAO.java</file>
-            <file>file:/C:/Users/gabriel.lima/Documents/NetBeansProjects/Sgo/src/java/DAO/ConexaoDAO.java</file>
-            <file>file:/C:/Users/gabriel.lima/Documents/NetBeansProjects/Sgo/web/index.jsp</file>
+            <file>file:/M:/TI/Sgo/Sgo/web/job/cadCentroCusto.jsp</file>
+            <file>file:/M:/TI/Sgo/Sgo/web/img/icon.png</file>
+            <file>file:/M:/TI/Sgo/Sgo/web/job/cadColaborador.jsp</file>
+            <file>file:/M:/TI/Sgo/Sgo/src/java/DAO/CentroCustoDAO.java</file>
+            <file>file:/M:/TI/Sgo/Sgo/web/job/navbar.jsp</file>
+            <file>file:/M:/TI/Sgo/Sgo/src/java/model/CentroCusto.java</file>
+            <file>file:/M:/TI/Sgo/Sgo/web/job/sql.jsp</file>
+            <file>file:/M:/TI/Sgo/Sgo/src/java/controller/CtrlCentroCusto.java</file>
+            <file>file:/M:/TI/Sgo/Sgo/web/job/index.jsp</file>
         </group>
     </open-files>
 </project-private>

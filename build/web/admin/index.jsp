@@ -6,12 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="seguranca.jsp"></c:import>
 <c:import url="head.jsp"></c:import>
     <title>Admin - SGO</title>
   </head>
   <body>
   <c:import url="navbar.jsp"></c:import>  
-  
     <div class="container">
         <div class='alert alert-warning'>
             <h4 class='text-center'>

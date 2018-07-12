@@ -4,8 +4,11 @@
     Author     : gabriel.lima
 --%>
 
-<%@page import="controller.CtrlUser"%>
+<%@page import="model.CentroCusto"%>
+<%@page import="controller.CtrlCentroCusto"%>
+<%@page import="controller.CtrlEquipamento"%>
 <%@page import="DAO.UserDAO"%>
+<%@page import="model.Equipamento"%>
 <%@page import="java.text.Normalizer"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.User"%>
@@ -18,12 +21,48 @@ HttpSession sessao = request.getSession();
 //Pega a ação que será realizada 
 String action = request.getParameter("action");
 String msg = "";
+//Usuario
+UserDAO dao = new  UserDAO();
+User c = new User();
 
-CtrlUser ctrl = new CtrlUser();
-User c = new User();  
+//Equipamento
+Equipamento e = new Equipamento();
+CtrlEquipamento ctrlEquipamento = new CtrlEquipamento();
+CtrlCentroCusto crtlcentrocusto = new CtrlCentroCusto();
+CentroCusto cen = new CentroCusto();
 String name,email,nivel,pws,nomeC,status,id,redefinir;
 
-if(action.equals("edit")){
+if(action.equals("cadCentroCusto")){
+    name = Normalizer.normalize(request.getParameter("nome"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        replaceAll(" ", "").toUpperCase();
+    String intinere = Normalizer.normalize(request.getParameter("intinere"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        replaceAll(" ", "").toUpperCase();
+    cen.setName(name);
+    cen.setIntinere(intinere);
+    String idUser = sessao.getAttribute("id").toString();
+    msg = crtlcentrocusto.cadastrarCentroCusto(cen, idUser);
+    sessao.setAttribute("msg", msg);
+
+    %>
+        <c:redirect url="cadCentroCusto.jsp"></c:redirect>
+    <%
+    
+} else if(action.equals("cadEquipamento")){
+    name = Normalizer.normalize(request.getParameter("nome"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        replaceAll(" ", "").toUpperCase();
+    e.setName(name);
+    String idUser = sessao.getAttribute("id").toString();
+    msg = ctrlEquipamento.cadastrarEquipamneto(e,idUser);
+    sessao.setAttribute("msg", msg);
+
+    %>
+        <c:redirect url="cadEquipamento.jsp"></c:redirect>
+    <%
+    
+} else if(action.equals("edit")){
     name = Normalizer.normalize(request.getParameter("nome"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
         replaceAll(" ", "").toUpperCase();
@@ -44,7 +83,6 @@ if(action.equals("edit")){
     
         c.setPassword(redefinir);
     }
-    
     if(name.equals("") || status.equals("") || email.equals("") || id.equals("") || nivel.equals("") || nomeC.equals("")){
         msg = "<div class='bg-danger'><h4 class'text-center'>Preencha todos os campos</h4></div>";
     }else{
@@ -57,7 +95,7 @@ if(action.equals("edit")){
         c.setNomeCompleto(nomeC);
         
         //Verifca se cadastrou 
-        msg = ctrl.editarUser(c);
+        msg = dao.editUser(c);
     }
 
 //Cria a sessão da mensagem 
@@ -65,39 +103,5 @@ sessao.setAttribute("msg", msg);
 %>
     <c:redirect url="user.jsp"></c:redirect>
 <%
-}else if(action.equals("cad")){
-    name = Normalizer.normalize(request.getParameter("nome"), 
-        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
-        replaceAll(" ", "").toUpperCase();
-    email = Normalizer.normalize(request.getParameter("email"), 
-        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
-        toLowerCase();
-    nivel = Normalizer.normalize(request.getParameter("nivel"), 
-        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-    nomeC = Normalizer.normalize(request.getParameter("nomeC"), 
-        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toUpperCase();
-    
-    
-        //Verifa se alguns dos campos estão fazios 
-        if(name.equals("") || email.equals("") || nivel.equals("") || nomeC.equals("")){
-            msg = "<div class='bg-danger'><h4 class'text-center'>Preencha todos os campos</h4></div>";
-        }else{
-
-            //Instacia a classe e seta os objetos             
-            c.setName(name);
-            c.setEmail(email);
-            c.setNivel(nivel);
-            c.setNomeCompleto(nomeC);
-            String idUser = sessao.getAttribute("id").toString();
-            //Verifca se cadastrou 
-            
-            msg = ctrl.cadastrarUser(c,idUser);
-        }
-        
-   //Cria a sessão da mensagem 
-    sessao.setAttribute("msg", msg);
-    %>
-        <c:redirect url="cadUser.jsp"></c:redirect>
-    <%  
 }
 %>

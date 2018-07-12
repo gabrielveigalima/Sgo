@@ -17,19 +17,13 @@
     <meta name="description" content="Pagina de login">
     <meta name="author" content="gabriel.lima">
     <link rel="icon" href="img/icon.png">
-
     <title>Login - SGO</title>
-
     <link href="css/bootstrap.css" rel="stylesheet">
-
     <link href="/docs/3.3/../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
     <link href="css/style.css" rel="stylesheet">
-
     <script src="/docs/3.3/../assets/js/ie-emulation-modes-warning.js"></script>
-
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   </head>
 
   <body>      
@@ -38,10 +32,13 @@
         <h1>
         <c:if test="${not empty sessionScope.msg}">
             ${sessionScope.msg}
+            <%
+                HttpSession sessao = request.getSession();
+                sessao.setAttribute("msg", null);
+            %>
         </c:if>
         </h1>
         <form action="valida.jsp" method="post" class="form-signin">
-
           <img class="img-responsive center-block" src="img/logo_bsm.png">
           <input type="hidden" value="login" name="action">
           <h3 class="form-signin-heading text-center">Login </h3>
