@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class Colaborador {
     String nome;
-    long matricula;
-    Date dataInicioCentroCusto;
+    String matricula;
+    String dataInicioCentroCusto;
 
     public String getNome() {
         return nome;
@@ -24,19 +24,19 @@ public class Colaborador {
         this.nome = nome;
     }
 
-    public long getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(long matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
-    public Date getDataInicioCentroCusto() {
+    public String getDataInicioCentroCusto() {
         return dataInicioCentroCusto;
     }
 
-    public void setDataInicioCentroCusto(Date dataInicioCentroCusto) {
+    public void setDataInicioCentroCusto(String dataInicioCentroCusto) {
         this.dataInicioCentroCusto = dataInicioCentroCusto;
     }
 }

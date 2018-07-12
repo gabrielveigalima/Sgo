@@ -4,6 +4,11 @@
     Author     : gabriel.lima
 --%>
 
+<%@page import="controller.CtrlColaborador"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="model.Colaborador"%>
+<%@page import="java.util.Date"%>
 <%@page import="model.CentroCusto"%>
 <%@page import="controller.CtrlCentroCusto"%>
 <%@page import="controller.CtrlEquipamento"%>
@@ -30,9 +35,33 @@ Equipamento e = new Equipamento();
 CtrlEquipamento ctrlEquipamento = new CtrlEquipamento();
 CtrlCentroCusto crtlcentrocusto = new CtrlCentroCusto();
 CentroCusto cen = new CentroCusto();
+Colaborador colaborador = new Colaborador();
+CtrlColaborador crtlcolaborador = new CtrlColaborador();
+
 String name,email,nivel,pws,nomeC,status,id,redefinir;
 
-if(action.equals("cadCentroCusto")){
+String idUser = sessao.getAttribute("id").toString();
+
+if(action.equals("cadColaborador")){
+    name = Normalizer.normalize(request.getParameter("nome"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        replaceAll(" ", "").toUpperCase();
+    String matricula = request.getParameter("matricula");
+    String cCusto = request.getParameter("cCusto");
+    
+    colaborador.setNome(name);
+    colaborador.setMatricula(matricula);
+    colaborador.setDataInicioCentroCusto(request.getParameter("data"));
+    cen.setId(cCusto);
+    
+    msg = crtlcolaborador.cadastrarColaborador(colaborador, cen, idUser);
+    sessao.setAttribute("msg", msg);
+
+    %>
+        <c:redirect url="cadColaborador.jsp"></c:redirect>
+    <%
+    
+} else if(action.equals("cadCentroCusto")){
     name = Normalizer.normalize(request.getParameter("nome"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
         replaceAll(" ", "").toUpperCase();
@@ -41,7 +70,6 @@ if(action.equals("cadCentroCusto")){
         replaceAll(" ", "").toUpperCase();
     cen.setName(name);
     cen.setIntinere(intinere);
-    String idUser = sessao.getAttribute("id").toString();
     msg = crtlcentrocusto.cadastrarCentroCusto(cen, idUser);
     sessao.setAttribute("msg", msg);
 
@@ -54,7 +82,6 @@ if(action.equals("cadCentroCusto")){
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
         replaceAll(" ", "").toUpperCase();
     e.setName(name);
-    String idUser = sessao.getAttribute("id").toString();
     msg = ctrlEquipamento.cadastrarEquipamneto(e,idUser);
     sessao.setAttribute("msg", msg);
 

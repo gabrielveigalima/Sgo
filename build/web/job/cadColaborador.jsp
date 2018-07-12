@@ -26,15 +26,15 @@
             <div class="container">
                 <div class="col-md-8">
                     <label >Nome</label>
-                    <input type="text" name="nome" class="form-control" placeholder="Digite o nome do colaborador">
+                    <input type="text" required="" name="nome" class="form-control" placeholder="Digite o nome do colaborador">
                 </div>
                 <div class="col-md-4">
                     <label>Matrícula</label>
-                    <input type="text" name="nome" class="form-control" placeholder="Digite a matrícula do colaborador">
+                    <input required type="number" name="matricula" class="form-control" placeholder="Digite a matrícula do colaborador">
                 </div>
                 <div class="col-md-8">
                     <label>Centro de Custo</label>
-                    <select class="form-control">
+                    <select required class="form-control" name="cCusto">
                         <%
                          CtrlCentroCusto crtl = new CtrlCentroCusto();
                          ResultSet rs = crtl.selecionarCentroCustoAtivo();
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-4">
                     <label>Data de quando inicou no Centro de Custo</label>
-                    <input type="date" name="nome" class="form-control">
+                    <input required type="date" name="data" class="form-control">
                 </div>
                         <br>
                 <div class="col-md-12 center-block">
