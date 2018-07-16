@@ -31,4 +31,8 @@ public class CtrlCentroCusto {
     public ResultSet selecionarCentroCustoAtivo(){
         return dao.selectCentroCustoAtivo();
     }
+    
+    public ResultSet selecionarCentroCustoId(String id){
+        return dao.selectCentroCustoId(id);
+    }
 }

@@ -21,13 +21,32 @@
         <ul class="nav navbar-nav">
           <li><a href="index.jsp">Home</a></li>
           <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="cadColaborador.jsp">Colaborador</a></li>
-            <li><a href="cadCentroCusto.jsp">Centro de custo</a></li>
-            <li><a href="cadEquipamento.jsp">Equipamento</a></li>
-          </ul>
-        </li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Colaborador <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="cadColaborador.jsp"><span class="
+glyphicon glyphicon-plus-sign"></span> Cadastro Colaborador</a></li>
+              <li><a href="listColaborador.jsp"><span class="
+glyphicon glyphicon-list"></span> Listar Colaborador</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Centro de custo <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="cadCentroCusto.jsp"><span class="
+glyphicon glyphicon-plus-sign"></span> Cadastro Centro de custo</a></li>
+              <li><a href="listCentroCusto.jsp"><span class="
+glyphicon glyphicon-list"></span> Listar Centro de custo</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Equipamento <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="cadEquipamento.jsp"><span class="
+glyphicon glyphicon-plus-sign"></span> Cadastro Equipamento</a></li>
+              <li><a href="listEquipamento.jsp"><span class="
+glyphicon glyphicon-list"></span> Listar Equipamento</a></li>
+            </ul>
+          </li>
         </ul>
         <ul class='nav navbar-nav navbar-right'>
             <li class="dropdown">

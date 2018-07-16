@@ -86,6 +86,10 @@ public class UserDAO {
             sql = "SELECT * FROM tblUser WHERE nivel=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, u.getNivel());
+        }else if( u.getIdUser() != null){
+            sql = "SELECT * FROM tblUser WHERE idUser=?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, u.getIdUser());
         }
         try{
             rs = ps.executeQuery();

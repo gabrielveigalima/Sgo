@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.ColaboradorDAO;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.CentroCusto;
 import model.Colaborador;
@@ -20,5 +21,9 @@ public class CtrlColaborador {
     CentroCusto cc = new CentroCusto();
     public String cadastrarColaborador(Colaborador cola, CentroCusto cc, String id) throws SQLException{
         return dao.cadastrarColaborador(cc, cola, id);
+    }
+    
+    public ResultSet listar(){
+        return dao.listar();
     }
 }

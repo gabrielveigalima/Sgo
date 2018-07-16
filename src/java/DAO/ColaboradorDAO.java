@@ -25,6 +25,21 @@ public class ColaboradorDAO {
     Statement stmt;
     PreparedStatement ps;
     
+    public ResultSet listar(){
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT * FROM tblColaborador";
+            ps = con.prepareStatement(sql);     
+            rs = ps.executeQuery();
+        
+        }catch (SQLException e){
+            e.printStackTrace();
+            System.err.println("Erro ao selecionar Colaborador: "+e.toString());
+            rs = null;
+        }
+        return rs;
+    }
+    /*
     public ResultSet selectColaboradorAtivo(){
         ResultSet rs;
         try{
@@ -42,7 +57,7 @@ public class ColaboradorDAO {
         
         return rs;
     }
-    
+    */
     public String cadastrarColaborador(CentroCusto c, Colaborador cola, String id) throws SQLException{
         String r = "";
         String query = ("insert into tblColaborador (nome,matricula,centroCusto,dateInicioCentroCusto,"

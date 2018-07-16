@@ -24,6 +24,24 @@ public class CentroCustoDAO {
     Statement stmt;
     PreparedStatement ps;
     
+    public ResultSet selectCentroCustoId(String id){
+        ResultSet rs;
+        try{
+        String sql = "SELECT * FROM tblCentroCusto WHERE id=? ";
+        ps = con.prepareStatement(sql);        
+        ps.setString(1, id);
+                
+        rs = ps.executeQuery();
+        
+        }catch (SQLException e){
+            e.printStackTrace();
+            System.err.println("Erro ao selecionar Centro de custo pelo ID: "+e.toString());
+            rs = null;
+        }
+        
+        return rs;
+    }
+    
     public ResultSet selectCentroCustoAtivo(){
         ResultSet rs;
         try{
