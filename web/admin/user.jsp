@@ -58,7 +58,6 @@
                         <th>Nível</th>
                         <th>Email</th>
                         <th>Status</th>
-                        
                         <th>Mais</th>
                         <th>Editar</th>                     
                     </tr>

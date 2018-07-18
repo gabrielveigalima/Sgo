@@ -12,7 +12,15 @@ import java.util.Date;
  * @author gabriel.lima
  */
 public class Colaborador {
-    String nome;
+    String nome,id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     String matricula;
     String dataInicioCentroCusto;
 

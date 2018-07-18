@@ -31,7 +31,7 @@
                     %>
                 </c:if>
             </h1>
-            <form method="post" action='user.jsp' class="form-inline jumbotron">
+            <form method="post" action='listColaborador.jsp' class="form-inline jumbotron">
                 <input type="hidden" value="selectFiltro" name="action">
                 <div class="form-group">
                     <label for="exampleInputName2">Nome</label>
@@ -39,11 +39,11 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail2">Matrícula</label>
-                  <input name="email" type="number" class="form-control" id="exampleInputEmail2" placeholder="">
+                  <input name="matricula" type="number" class="form-control" id="exampleInputEmail2" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail2">Centro de Custo</label>
-                    <select name='nivel' class="form-control">
+                    <select name='cCusto' class="form-control">
                         <option>Sem Filtro</option>
                         <%
                          CtrlCentroCusto crtlCC = new CtrlCentroCusto();
@@ -67,7 +67,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Filtrar</button>
-                <a href='user.jsp' class="btn btn-success">Sem Filtrar</a>
+                <a href='listColaborador.jsp' class="btn btn-success">Sem Filtrar</a>
             </form><br><br>
             <div class="table-responsive">
                 <table class="table">
@@ -82,38 +82,42 @@
                     
                     
                         <%
+                            
                     ResultSet rs = null;
                     CtrlColaborador   ctrl = new  CtrlColaborador();
                     CentroCusto cc = new CentroCusto();
-                    if(request.getParameter("action") != null){
+                    if(request.getParameter("action")!= null){
                         String action = request.getParameter("action");
                         Colaborador cola = new Colaborador();  
                         
-                        //if(action.equals("select")){
                         //Pega os dados do formulário 
-                        if(!request.getParameter("matricula").equals("")){
-                            String matricula = Normalizer.normalize(request.getParameter("email"), 
-                            Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
-                            toLowerCase();
-                            cola.setMatricula(matricula);
-                        }else if(!request.getParameter("name").equals("")){
-                            String name = Normalizer.normalize(request.getParameter("name"), 
+                        if(request.getParameter("name")!= null){
+                            if(!request.getParameter("name").equals("")){
+                                String name = Normalizer.normalize(request.getParameter("name"), 
                             Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
                             replaceAll(" ", "").toUpperCase();
+                                System.out.println("TESTE: "+name);
                             cola.setNome(name);
-                        }else if(!request.getParameter("cCusto").equals("")){
-                            String cCusto = request.getParameter("cCusto");
-                            
-                            cc.setId(cCusto);
-
+                            }
                         }
-                         //rs = ctrl.selecionarFiltro(u);
-
-                        }else{
-                            rs = ctrl.listar();
+                        if(request.getParameter("matricula")!= null){
+                            if(!request.getParameter("matricula").equals("")){
+                                cola.setMatricula(request.getParameter("matricula"));
+                            }
+                        } 
+                        if( request.getParameter("cCusto")!= null){
+                            if(!request.getParameter("cCusto").equals("")){
+                                String cCusto = request.getParameter("cCusto");
+                                cc.setId(cCusto);
+                            }
                         }
-                         while(rs.next()){
-                        %>
+                        rs = ctrl.selectFiltro(cola,cc);
+                        
+                    }else{
+                        rs = ctrl.listar();
+                    }
+                    while(rs.next()){
+                    %>
                         <tr>
                             <td><%=rs.getString("id")%></td>
                             <td><%=rs.getString("nome")%></td>
@@ -130,14 +134,10 @@
                                     <%
                                 }
                                 %>
-                                
                             </td>
                             <td><button type="button" data-toggle="modal" data-target="#view<%=rs.getString("id")%>" class="btn btn-small btn-primary"><spam class="glyphicon glyphicon-eye-open"></spam></button></td>
                             <td><button type="button" data-toggle="modal" data-target="#edit<%=rs.getString("id")%>" class="btn btn-small btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></button></td>                        
-                            
-                        
                         </tr>
-                        
                         <!-- Modal -->
                         <div id="edit<%=rs.getString("id")%>" class="modal fade" role="dialog">
                           <div class="modal-dialog">
@@ -212,7 +212,6 @@
                                            %>
                                                <%= rsCC.getString("nome") %>
                                            <%
-
                                         }else{
                                             %>
                                             <option>Não tem centro de custo</option>
@@ -221,7 +220,6 @@
                                        %> 
                                     </p>
                                     <p>Início no Centro de Custo <%=rs.getString("dateInicioCentroCusto").replaceAll("-","/")%></p>
-                                
                                 <p>Criador: 
                                 <%
                                 User u = new User();
@@ -232,7 +230,6 @@
                                     <%
                                 }
                                 %>
-                                
                                 </p>
                               </div>
                               <div class="modal-footer">

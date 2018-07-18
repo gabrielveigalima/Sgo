@@ -26,4 +26,8 @@ public class CtrlColaborador {
     public ResultSet listar(){
         return dao.listar();
     }
+    
+    public ResultSet selectFiltro(Colaborador c, CentroCusto cc) throws SQLException{
+       return dao.selecFiltro(c,cc);
+    }
 }

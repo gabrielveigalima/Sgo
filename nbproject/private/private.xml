@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/M:/TI/Sgo/Sgo/web/job/cadCentroCusto.jsp</file>
-            <file>file:/M:/TI/Sgo/Sgo/src/java/controller/CtrlColaborador.java</file>
-            <file>file:/M:/TI/Sgo/Sgo/web/job/cadColaborador.jsp</file>
-            <file>file:/M:/TI/Sgo/Sgo/src/java/model/Colaborador.java</file>
-            <file>file:/M:/TI/Sgo/Sgo/src/java/model/CentroCusto.java</file>
-            <file>file:/M:/TI/Sgo/Sgo/web/job/sql.jsp</file>
+            <file>file:/S:/sgo/src/java/model/Colaborador.java</file>
+            <file>file:/S:/sgo/src/java/controller/CtrlColaborador.java</file>
+            <file>file:/S:/sgo/web/job/listColaborador.jsp</file>
+            <file>file:/S:/sgo/src/java/DAO/ColaboradorDAO.java</file>
+            <file>file:/S:/sgo/src/java/DAO/UserDAO.java</file>
         </group>
     </open-files>
 </project-private>
