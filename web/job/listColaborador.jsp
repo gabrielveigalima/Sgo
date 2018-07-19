@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail2">Centro de Custo</label>
                     <select name='cCusto' class="form-control">
-                        <option>Sem Filtro</option>
+                        <option value="">Sem Filtro</option>
                         <%
                          CtrlCentroCusto crtlCC = new CtrlCentroCusto();
                          ResultSet rst = crtlCC.selecionarCentroCustoAtivo();

@@ -28,20 +28,20 @@ public class ColaboradorDAO {
     public ResultSet selecFiltro(Colaborador c, CentroCusto cc) throws SQLException{
         ResultSet rs;
         String sql = "SELECT * FROM tblColaborador";
-        System.out.println("TESTE: "+c.getNome());
-        /*if(c.getNome() != null && c.getMatricula() != null && cc.getId() != null){
-            sql = "SELECT * FROM tblColaborador WHERE nome=%?% AND matricula=? AND centroCusto=?";
+        System.out.println("Nome: "+c.getNome()+" Matricula: "+c.getMatricula()+" CC: "+cc.getId());
+        if(c.getNome() != null && c.getMatricula() != null && cc.getId() != null){
+            sql = "SELECT * FROM tblColaborador WHERE nome=? AND matricula=? AND centroCusto=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getNome());
             ps.setString(2, c.getMatricula());
             ps.setString(3, cc.getId());
         }else if(c.getNome() != null && c.getMatricula() != null ){
-            sql = "SELECT * FROM tblColaborador WHERE nome=%?% AND matricula=?";
+            sql = "SELECT * FROM tblColaborador WHERE nome=? AND matricula=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getNome());
             ps.setString(2, c.getMatricula());            
         }else if(c.getNome() != null && cc.getId() != null){
-            sql = "SELECT * FROM tblColaborador WHERE nome=%?% AND centroCusto=?";
+            sql = "SELECT * FROM tblColaborador WHERE nome=? AND centroCusto=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getNome());
             ps.setString(2, cc.getId());
@@ -50,8 +50,8 @@ public class ColaboradorDAO {
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getMatricula());
             ps.setString(2, cc.getId());
-        }else */if(c.getNome() != null){
-            sql = "SELECT * FROM tblColaborador WHERE nome=%?%";
+        }else if(c.getNome() != null){
+            sql = "SELECT * FROM tblColaborador WHERE nome=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getNome());
            
