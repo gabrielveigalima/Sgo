@@ -42,7 +42,7 @@
                             <% 
                         }else if(u.getNivel().toString().equals("2")){
                             %>
-                                <c:redirect url="job/index.jsp"></c:redirect>
+                                <c:redirect url="operacional/index.jsp"></c:redirect>
                             <%
                         }                            
                     }else{

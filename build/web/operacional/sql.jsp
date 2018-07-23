@@ -42,7 +42,30 @@ String name,email,nivel,pws,nomeC,status,id,redefinir;
 
 String idUser = sessao.getAttribute("id").toString();
 
-if(action.equals("cadColaborador")){
+if(action.equals("editColaborador")){
+    String idColaborador = request.getParameter("id");
+    name = Normalizer.normalize(request.getParameter("nomeU"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        replaceAll(" ", "").toUpperCase();
+    String matricula = request.getParameter("matricula");
+    String cCusto = request.getParameter("cc");
+    
+    colaborador.setId(idColaborador);
+    colaborador.setNome(name);
+    
+    colaborador.setMatricula(matricula);
+    colaborador.setDataInicioCentroCusto(request.getParameter("dateInicioCentroCusto"));
+    colaborador.setStatus(request.getParameter("status"));
+    cen.setId(cCusto);
+    
+    msg = crtlcolaborador.editarColaborador(colaborador, cen);
+    sessao.setAttribute("msg", msg);
+
+    %>
+        <c:redirect url="listColaborador.jsp"></c:redirect>
+    <%
+    
+} else if(action.equals("cadColaborador")){
     name = Normalizer.normalize(request.getParameter("nome"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
         replaceAll(" ", "").toUpperCase();

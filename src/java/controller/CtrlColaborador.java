@@ -30,4 +30,8 @@ public class CtrlColaborador {
     public ResultSet selectFiltro(Colaborador c, CentroCusto cc) throws SQLException{
        return dao.selecFiltro(c,cc);
     }
+    public String editarColaborador(Colaborador cola, CentroCusto cc) throws SQLException{
+        
+        return dao.editarColaborador(cola, cc);
+    }
 }

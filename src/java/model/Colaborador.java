@@ -12,7 +12,7 @@ import java.util.Date;
  * @author gabriel.lima
  */
 public class Colaborador {
-    String nome,id;
+    String nome,id,status;
 
     public String getId() {
         return id;
@@ -34,6 +34,14 @@ public class Colaborador {
 
     public String getMatricula() {
         return matricula;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setMatricula(String matricula) {

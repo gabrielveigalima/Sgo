@@ -24,11 +24,34 @@ public class ColaboradorDAO {
     
     Statement stmt;
     PreparedStatement ps;
+    public String editarColaborador(Colaborador cola, CentroCusto cc) throws SQLException{
+        String r = "";
+        String query = ("UPDATE tblColaborador SET nome=? , matricula=? , "
+                + "centroCusto=? , dateInicioCentroCusto=? , ativo=? WHERE id=?"); 
+        
+        //Cadastra usuario
+        ps = con.prepareStatement(query);
+        ps.setString(1, cola.getNome());
+        ps.setString(2, cola.getMatricula());
+        ps.setString(3, cc.getId());
+        ps.setString(4, cola.getDataInicioCentroCusto() );
+        ps.setString(5, cola.getStatus());
+        ps.setString(6, cola.getId()); 
+
+
+        try {
+            ps.executeUpdate();
+            r = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Colaborador foi cadastrado.</h4></div><br>";            
+        } catch (Exception ex) {
+            System.out.println("Erro ao Cadastrar: " + ex.toString());
+           r = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Erro ao Cadastrar: " +ex.toString()+".</h4></div><br>";
+        }
+        return r;
+    }
     
     public ResultSet selecFiltro(Colaborador c, CentroCusto cc) throws SQLException{
         ResultSet rs;
         String sql = "SELECT * FROM tblColaborador";
-        System.out.println("Nome: "+c.getNome()+" Matricula: "+c.getMatricula()+" CC: "+cc.getId());
         if(c.getNome() != null && c.getMatricula() != null && cc.getId() != null){
             sql = "SELECT * FROM tblColaborador WHERE nome=? AND matricula=? AND centroCusto=?";
             ps = con.prepareStatement(sql);

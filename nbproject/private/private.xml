@@ -5,9 +5,7 @@
         <group>
             <file>file:/S:/sgo/src/java/model/Colaborador.java</file>
             <file>file:/S:/sgo/src/java/controller/CtrlColaborador.java</file>
-            <file>file:/S:/sgo/web/job/listColaborador.jsp</file>
             <file>file:/S:/sgo/src/java/DAO/ColaboradorDAO.java</file>
-            <file>file:/S:/sgo/src/java/DAO/UserDAO.java</file>
         </group>
     </open-files>
 </project-private>

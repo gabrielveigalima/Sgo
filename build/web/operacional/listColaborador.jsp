@@ -149,17 +149,55 @@
                               </div>
                               <div class="modal-body">
                                   <form method="post" action="sql.jsp">
-                                    <input type="hidden" name="action" value='edit'>
+                                    <input type="hidden" name="action" value='editColaborador'>
                                     <input type="hidden" name="id" value='<%=rs.getString("id")%>'>
+                                    
                                     <div class="form-group">
-                                        <input name="nome" value="<%=rs.getString("nome")%>" type="text" class="form-control" placeholder="Nome">
-                                    </div>
-                                    <div class="form-group">
-                                      <input name="nomeC" type="text" class="form-control" placeholder="Nome Completo" value="<%=rs.getString("nome")%>">
+                                      <label>Nome:</label>
+                                      <input name="nomeU" type="text" class="form-control" placeholder="Nome Completo" value="<%=rs.getString("nome")%>">
+                                      <label>Matrícula</label>
+                                      <input name="matricula" type="text" class="form-control" placeholder="Nome Completo" value="<%=rs.getString("matricula")%>">
+                                      <label>Centro de Custo</label>
+                                      <select name="cc" class="form-control">
+                                        <%
+                                            String idCCEdit = rs.getString("centroCusto");
+                                            ResultSet rsCCEdit = crtlCC.selecionarCentroCustoId(idCCEdit);
+                                            if(rsCCEdit.next()){
+                                               %>
+                                                   
+                                                   <option value="<%= rsCCEdit.getString("id") %>"><%= rsCCEdit.getString("nome") %></option>
+                                               <%
+                                            }else{
+                                                %>
+                                                <option>Não tem centro de custo</option>
+                                                <%
+                                            }
+                                            rst = crtlCC.selecionarCentroCustoAtivo();
+                                            if(rst.next()){
+                                               %>
+                                                   <option value="<%= rst.getString("id") %>"><%= rst.getString("nome") %></option>
+                                               <%
+                                                while(rst.next()){
+                                                    %>
+                                                    <option value="<%= rst.getString("id") %>"><%= rst.getString("nome") %></option>
+
+                                                    <%
+                                                }
+                                            }else{
+                                                %>
+                                                <option>Não tem centro de custo</option>
+                                                <%
+                                            }
+                                        %> 
+                                      </select>
+                                      <label>Início no Centro de Custo</label>
+                                      <input name="dateInicioCentroCusto" type="date" class="form-control" placeholder="Nome Completo" value="<%=rs.getString("dateInicioCentroCusto")%>">
+                                      
+                                      <label>Status do usuário</label>  
                                       <select name="status" class="form-control">
                                         <% if(rs.getString("ativo").equals("0")){
                                             %>
-                                            <option value="0" >Inativo</option>
+                                            <option value="0" >Desativado</option>
                                             <%
                                         }else if(rs.getString("ativo").equals("1")){
                                             %>
@@ -168,7 +206,7 @@
                                         }   
                                             %>
                                         <option value="1" >Ativo</option>
-                                        <option value="0" >Inativo</option>
+                                        <option value="0" >Desativado</option>
                                       </select>                                      
                                     </div>
                                     <button type="submit" class="btn btn-success">Salvar</button>
