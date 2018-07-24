@@ -42,7 +42,21 @@ String name,email,nivel,pws,nomeC,status,id,redefinir;
 
 String idUser = sessao.getAttribute("id").toString();
 
-if(action.equals("editColaborador")){
+if(action.equals("excluirColaborador")){
+    String idColaborador = request.getParameter("id");
+    
+    
+    colaborador.setId(idColaborador);
+    
+    
+    msg = crtlcolaborador.mudarStatusColaborador(colaborador);
+    sessao.setAttribute("msg", msg);
+
+    %>
+        <c:redirect url="listColaborador.jsp"></c:redirect>
+    <%
+    
+} else if(action.equals("editColaborador")){
     String idColaborador = request.getParameter("id");
     name = Normalizer.normalize(request.getParameter("nomeU"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
