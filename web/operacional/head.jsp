@@ -23,7 +23,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="gabriel.lima">
-    <link rel="icon" href="../img/icon.png">
+    <link  rel="icon" href="../img/icon.png"/>
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
  

@@ -35,4 +35,7 @@ public class CtrlCentroCusto {
     public ResultSet selecionarCentroCustoId(String id){
         return dao.selectCentroCustoId(id);
     }
+    public ResultSet selectFiltro(CentroCusto c){
+        return dao.selectFiltro(c);
+    }
 }

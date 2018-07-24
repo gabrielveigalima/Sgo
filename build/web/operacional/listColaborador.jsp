@@ -16,8 +16,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="seguranca.jsp"></c:import>
 <c:import url="head.jsp"></c:import>
-<title>Cadastro de Equipamento - SGO</title>
-        <title>JSP Page</title>
+
+        <title>Listar Colaborador - Operacional - SGO</title>
     </head>
     <body>
         <c:import url="navbar.jsp"></c:import>  
