@@ -64,7 +64,7 @@ public class CentroCustoDAO {
     public ResultSet selectCentroCustoAtivo(){
         ResultSet rs;
         try{
-        String sql = "SELECT * FROM tblCentroCusto WHERE ativo=? ";
+        String sql = "SELECT * FROM tblCentroCusto WHERE ativo=? ORDER BY id DESC";
         ps = con.prepareStatement(sql);        
         ps.setString(1, "1");
                 
@@ -99,15 +99,40 @@ public class CentroCustoDAO {
             }
             try {
                 ps.executeUpdate();
-                r = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Equipamento foi cadastrado.</h4></div><br>";            
+                r = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Centro de Custo foi foi cadastrado.</h4></div><br>";            
             } catch (Exception ex) {
                 System.out.println("Erro ao Cadastrar: " + ex.toString());
                r = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Erro ao Cadastrar: " +ex.toString()+".</h4></div><br>";
             }
         }else{
-            r = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Equipamento já cadastrado.</h4></div><br>";
+            r = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Centro de Custo foi já cadastrado.</h4></div><br>";
         }
     
+        return r;
+    }
+    
+    public String editarCentroCustoAtivo(CentroCusto c) throws SQLException{
+        String r = "";
+        if(c.getIntinere().equals("")){
+            String query = ("UPDATE tblCentroCusto SET nome=?, intinere='NULL'  WHERE id=?"); 
+            ps = con.prepareStatement(query);
+            ps.setString(1, c.getName());
+            ps.setString(2, c.getId());
+        }else{
+            String query = ("UPDATE tblCentroCusto SET nome=?, intinere=?  WHERE id=?"); 
+            ps = con.prepareStatement(query);
+            ps.setString(1, c.getName());
+            ps.setString(2, c.getIntinere());
+            ps.setString(3, c.getId());
+        }
+        
+        try {
+            ps.executeUpdate();
+            r = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Centro de Custo foi editado.</h4></div><br>";            
+        } catch (Exception ex) {
+            System.out.println("Erro ao Cadastrar: " + ex.toString());
+           r = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Erro ao editar: " +ex.toString()+".</h4></div><br>";
+        }
         return r;
     }
     

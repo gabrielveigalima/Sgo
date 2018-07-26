@@ -50,7 +50,7 @@
                         <th>Mais</th>
                         <th>Editar</th>                     
                     </tr>
-                    
+                   
                     
                         <%
                     CtrlCentroCusto ctrl = new CtrlCentroCusto();
@@ -98,12 +98,17 @@
                               </div>
                               <div class="modal-body">
                                   <form method="post" action="sql.jsp">
-                                    <input type="hidden" name="action" value='editColaborador'>
+                                    <input type="hidden" name="action" value='editCentroCusto'>
                                     <input type="hidden" name="id" value='<%=rs.getString("id")%>'>
                                     
                                     <div class="form-group">
                                       <label>Nome:</label>
-                                      <input name="nomeU" type="text" class="form-control" placeholder="Nome Completo" value="<%=rs.getString("nome")%>">
+                                      <input name="nomeC" type="text" class="form-control" placeholder="Centro de Custo" value="<%=rs.getString("nome")%>">
+                                      <label>Intinere:</label>
+                                      <input name="intinere" type="text" class="form-control" placeholder="Intinere:" value="<%
+                                    if(!rs.getString("intinere").equals("NULL")){
+                                        %><%=rs.getString("intinere")%><%
+                                    } %>">
                                     </div>
                                     <button type="submit" class="btn btn-success">Salvar</button>
                                   </form>
@@ -126,7 +131,7 @@
                               <div class="modal-body">
                                 <p>Nome: <%=rs.getString("nome")%></p>
                                 <p>Criação: <%=rs.getString("dateCreate").replaceAll("-","/")%></p>
-                                <p>intinere: <%
+                                <p>Intinere: <%
                                     if(rs.getString("intinere").equals("NULL")){
                                         %>Não tem intinere<%
                                     }else{

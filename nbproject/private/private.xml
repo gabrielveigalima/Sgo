@@ -4,8 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/S:/sgo/src/java/model/Colaborador.java</file>
-            <file>file:/S:/sgo/src/java/controller/CtrlColaborador.java</file>
+            <file>file:/S:/sgo/web/operacional/sql.jsp</file>
             <file>file:/S:/sgo/src/java/DAO/ColaboradorDAO.java</file>
+            <file>file:/S:/sgo/src/java/DAO/CentroCustoDAO.java</file>
+            <file>file:/S:/sgo/src/java/controller/CtrlCentroCusto.java</file>
+            <file>file:/S:/sgo/web/operacional/listCentroCusto.jsp</file>
         </group>
     </open-files>
 </project-private>

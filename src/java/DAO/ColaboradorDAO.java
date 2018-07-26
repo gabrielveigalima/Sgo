@@ -71,45 +71,45 @@ public class ColaboradorDAO {
         ResultSet rs;
         String sql = "SELECT * FROM tblColaborador";
         if(c.getNome() != null && c.getMatricula() != null && cc.getId() != null){
-            sql = "SELECT * FROM tblColaborador WHERE nome=? AND matricula=? AND centroCusto=?";
+            sql = "SELECT * FROM tblColaborador WHERE nome=? AND matricula=? AND centroCusto=?  ORDER BY id DESC";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getNome());
             ps.setString(2, c.getMatricula());
             ps.setString(3, cc.getId());
         }else if(c.getNome() != null && c.getMatricula() != null ){
-            sql = "SELECT * FROM tblColaborador WHERE nome=? AND matricula=?";
+            sql = "SELECT * FROM tblColaborador WHERE nome=? AND matricula=?  ORDER BY id DESC";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getNome());
             ps.setString(2, c.getMatricula());            
         }else if(c.getNome() != null && cc.getId() != null){
-            sql = "SELECT * FROM tblColaborador WHERE nome=? AND centroCusto=?";
+            sql = "SELECT * FROM tblColaborador WHERE nome=? AND centroCusto=?  ORDER BY id DESC";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getNome());
             ps.setString(2, cc.getId());
         }else if(c.getMatricula() != null && cc.getId() != null){
-            sql = "SELECT * FROM tblColaborador WHERE matricula=? AND centroCusto=?";
+            sql = "SELECT * FROM tblColaborador WHERE matricula=? AND centroCusto=?  ORDER BY id DESC";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getMatricula());
             ps.setString(2, cc.getId());
         }else if(c.getNome() != null){
-            sql = "SELECT * FROM tblColaborador WHERE nome=?";
+            sql = "SELECT * FROM tblColaborador WHERE nome=?  ORDER BY id DESC ";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getNome());
            
         }else if(c.getMatricula() != null){
             System.out.println("RESUL: "+c.getMatricula());
-            sql = "SELECT * FROM tblColaborador WHERE matricula=?";
+            sql = "SELECT * FROM tblColaborador WHERE matricula=?  ORDER BY id DESC";
             ps = con.prepareStatement(sql);
            
             ps.setString(1, c.getMatricula());
             
         }else if( cc.getId() != null){
             System.out.println("RESUL: "+cc.getId());
-            sql = "SELECT * FROM tblColaborador WHERE centroCusto=?";
+            sql = "SELECT * FROM tblColaborador WHERE centroCusto=?  ORDER BY id DESC";
             ps = con.prepareStatement(sql);
             ps.setString(1, cc.getId());
         }else if( c.getId() != null){
-            sql = "SELECT * FROM tblColaborador WHERE id=?";
+            sql = "SELECT * FROM tblColaborador WHERE id=?  ORDER BY id DESC";
             ps = con.prepareStatement(sql);
             ps.setString(1, c.getId());
         }else{
@@ -128,7 +128,7 @@ public class ColaboradorDAO {
     public ResultSet listarUsuario(){
         ResultSet rs = null;
         try{
-            String sql = "SELECT * FROM tblColaborador WHERE ativo='1'";
+            String sql = "SELECT * FROM tblColaborador WHERE ativo='1'  ORDER BY id DESC";
             ps = con.prepareStatement(sql);     
             rs = ps.executeQuery();
         
@@ -194,7 +194,7 @@ public class ColaboradorDAO {
     public boolean selectColaboradorMatricula(String matricula){
         ResultSet rs;
         try{
-            ps = con.prepareStatement("SELECT * FROM tblColaborador where matricula=?");
+            ps = con.prepareStatement("SELECT * FROM tblColaborador where matricula=?  ORDER BY id DESC");
             ps.setString(1, matricula);
             rs = ps.executeQuery();
             if(rs.next()){

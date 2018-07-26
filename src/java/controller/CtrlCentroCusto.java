@@ -24,8 +24,11 @@ public class CtrlCentroCusto {
     Statement stmt;
     PreparedStatement ps;
     
-     public String cadastrarCentroCusto(CentroCusto e, String id) throws SQLException{
+    public String cadastrarCentroCusto(CentroCusto e, String id) throws SQLException{
         return dao.cadastrarCentroCusto(e,id);
+    }
+    public String editarCentroCustoAtivo(CentroCusto e) throws SQLException{
+        return dao.editarCentroCustoAtivo(e);
     }
      
     public ResultSet selecionarCentroCustoAtivo(){
