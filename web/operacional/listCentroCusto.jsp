@@ -14,9 +14,8 @@
 <%@page import="controller.CtrlCentroCusto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="seguranca.jsp"></c:import>
-<c:import url="head.jsp"></c:import>
 
+<html><head>
         <title>Centro de Custo - Operacional - SGO</title>
     </head>
     <body>
@@ -50,8 +49,6 @@
                         <th>Mais</th>
                         <th>Editar</th>                     
                     </tr>
-                   
-                    
                         <%
                     CtrlCentroCusto ctrl = new CtrlCentroCusto();
                     ResultSet rst = ctrl.selecionarCentroCustoAtivo();
@@ -68,7 +65,6 @@
                                 String name = Normalizer.normalize(request.getParameter("name"), 
                             Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
                             replaceAll(" ", "").toUpperCase();
-                                System.out.println("TESTE: "+name);
                             cc.setName(name);
                             }
                         }
@@ -137,9 +133,7 @@
                                     }else{
                                         %><%=rs.getString("intinere")%><%
                                     }
-                                    
                                 %>
-                                
                                 </p>
                                 <p>Criador: 
                                 <%
@@ -148,7 +142,7 @@
                                 ResultSet rsu = new CtrlUser().selecionarFiltro(u);
                                 if(rsu.next()){ %>
                                     <%=rsu.getString("email")%>
-                                    <%
+                                <%
                                 }
                                 %>
                                 </p>

@@ -35,7 +35,7 @@
                 <input type="hidden" value="selectFiltro" name="action">
                 <div class="form-group">
                     <label for="exampleInputName2">Nome</label>
-                    <input name="name" type="text" class="form-control" id="exampleInputName2" placeholder="">
+                    <input name="name" type="text" class="form-control" id="exampleInputName2" placeholder="Gabriel">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail2">Matrícula</label>
@@ -75,10 +75,9 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Matrícula</th>
-                        
+                        <th>Status</th>
                         <th>Mais</th>
-                        <th>Editar</th> 
-                        <th>Excluir</th>
+                        <th>Editar</th>                     
                     </tr>
                     
                     
@@ -115,7 +114,7 @@
                         rs = ctrl.selectFiltro(cola,cc);
                         
                     }else{
-                        rs = ctrl.listarUsuario();
+                        rs = ctrl.listar();
                     }
                     while(rs.next()){
                     %>
@@ -123,10 +122,21 @@
                             <td><%=rs.getString("id")%></td>
                             <td><%=rs.getString("nome")%></td>
                             <td><%=rs.getString("matricula")%></td>
-                            
+                            <td>
+                                <%
+                                if(rs.getString("ativo").equals("1")){
+                                    %>
+                                    Ativo
+                                    <%
+                                }else{
+                                    %>
+                                    Desativado
+                                    <%
+                                }
+                                %>
+                            </td>
                             <td><button type="button" data-toggle="modal" data-target="#view<%=rs.getString("id")%>" class="btn btn-small btn-primary"><spam class="glyphicon glyphicon-eye-open"></spam></button></td>
-                            <td><button type="button" data-toggle="modal" data-target="#edit<%=rs.getString("id")%>" class="btn btn-small btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></button></td>  
-                            <td><button type="button" data-toggle="modal" data-target="#excluir<%=rs.getString("id")%>" class="btn btn-small btn-danger"><spam class="glyphicon glyphicon-remove"></spam></button></td>
+                            <td><button type="button" data-toggle="modal" data-target="#edit<%=rs.getString("id")%>" class="btn btn-small btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></button></td>                        
                         </tr>
                         <!-- Modal -->
                         <div id="edit<%=rs.getString("id")%>" class="modal fade" role="dialog">
@@ -183,7 +193,21 @@
                                       <label>Início no Centro de Custo</label>
                                       <input name="dateInicioCentroCusto" type="date" class="form-control" placeholder="Nome Completo" value="<%=rs.getString("dateInicioCentroCusto")%>">
                                       
-                                                                            
+                                      <label>Status do usuário</label>  
+                                      <select name="status" class="form-control">
+                                        <% if(rs.getString("ativo").equals("0")){
+                                            %>
+                                            <option value="0" >Desativado</option>
+                                            <%
+                                        }else if(rs.getString("ativo").equals("1")){
+                                            %>
+                                            <option value="1" >Ativo</option>
+                                            <%
+                                        }   
+                                            %>
+                                        <option value="1" >Ativo</option>
+                                        <option value="0" >Desativado</option>
+                                      </select>                                      
                                     </div>
                                     <button type="submit" class="btn btn-success">Salvar</button>
                                   </form>
@@ -206,7 +230,17 @@
                               <div class="modal-body">
                                 <p>Nome: <%=rs.getString("nome")%></p>
                                 <p>Matrícula <%=rs.getString("matricula")%></p>
-                                
+                                <p>Status: <% if(rs.getString("ativo").equals("0")){
+                                    %>
+                                    Inativo
+                                    <%
+                                }else if(rs.getString("ativo").equals("1")){
+                                    %>
+                                    Ativo
+                                    <%
+                                }   
+                                    %>
+                                    </p>
                                     <p>Criação: <%=rs.getString("dateCreate").replaceAll("-","/")%></p>
                                     <p>Centro de Custo:
                                     <% 
@@ -242,29 +276,6 @@
                             </div>
                           </div>
                         </div>
-                        <div id="excluir<%=rs.getString("id")%>" class="modal fade" role="dialog">
-                          <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Dejesa excluir <%=rs.getString("nome")%> ?</h4>
-                              </div>
-                              
-                              <div class="modal-footer">
-                                
-                                  <form method="post" action="sql.jsp">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                                    <input type="hidden" name="id" value='<%=rs.getString("id")%>'>
-                                    <input type="hidden" name="action" value='excluirColaborador'>
-                                    <button type="submit" class="btn btn-danger" >Sim</button>
-
-                                </form>
-                                
-                              </div>
-                            </div>
-                          </div>
-                        </div>        
                         <%
                         }
                         %>

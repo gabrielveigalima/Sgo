@@ -23,17 +23,15 @@ public class CtrlColaborador {
         return dao.cadastrarColaborador(cc, cola, id);
     }
     
-    public ResultSet listarUsuario(){
-        return dao.listarUsuario();
+    public ResultSet listar(){
+        return dao.listar();
     }
     
     public ResultSet selectFiltro(Colaborador c, CentroCusto cc) throws SQLException{
        return dao.selecFiltro(c,cc);
     }
     public String editarColaborador(Colaborador cola, CentroCusto cc) throws SQLException{
+        
         return dao.editarColaborador(cola, cc);
-    }
-    public String mudarStatusColaborador(Colaborador c) throws SQLException{
-       return dao.mudarStatusColaborador(c);
     }
 }

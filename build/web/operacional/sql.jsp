@@ -42,6 +42,7 @@ String name,email,nivel,pws,nomeC,status,id,redefinir;
 
 String idUser = sessao.getAttribute("id").toString();
 
+<<<<<<< HEAD
 if(action.equals("editCentroCusto")){
     String idCc = request.getParameter("id");
     name = Normalizer.normalize(request.getParameter("nomeC"), 
@@ -75,6 +76,9 @@ if(action.equals("editCentroCusto")){
     <%
     
 } else if(action.equals("editColaborador")){
+=======
+if(action.equals("editColaborador")){
+>>>>>>> parent of d3e71e8... excluindo (ocultando) Colaborador
     String idColaborador = request.getParameter("id");
     name = Normalizer.normalize(request.getParameter("nomeU"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").

@@ -5,7 +5,6 @@
         <group>
             <file>file:/S:/sgo/src/java/model/Colaborador.java</file>
             <file>file:/S:/sgo/web/operacional/sql.jsp</file>
-            <file>file:/S:/sgo/src/java/DAO/ColaboradorDAO.java</file>
             <file>file:/S:/sgo/src/java/DAO/CentroCustoDAO.java</file>
             <file>file:/S:/sgo/src/java/controller/CtrlCentroCusto.java</file>
             <file>file:/S:/sgo/web/operacional/listCentroCusto.jsp</file>
