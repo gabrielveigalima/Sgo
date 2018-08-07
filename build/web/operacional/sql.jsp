@@ -60,7 +60,18 @@ if(action.equals("editCentroCusto")){
         <c:redirect url="listCentroCusto.jsp"></c:redirect>
     <%
     
-} else if(action.equals("excluirColaborador")){
+} else if(action.equals("excluirCentroCusto")){
+    String idCc = request.getParameter("id");
+    cen.setId(idCc);
+   
+    msg = crtlcentrocusto.mudarStatusCC(cen);
+    sessao.setAttribute("msg", msg);
+
+    %>
+        <c:redirect url="listCentroCusto.jsp"></c:redirect>
+    <%
+    
+}else if(action.equals("excluirColaborador")){
     String idColaborador = request.getParameter("id");
     
     colaborador.setId(idColaborador);

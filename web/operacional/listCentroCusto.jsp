@@ -47,7 +47,8 @@
                         <th>Nome</th>
                         <th>Criação</th>
                         <th>Mais</th>
-                        <th>Editar</th>                     
+                        <th>Editar</th> 
+                        <th>Excluir</th> 
                     </tr>
                         <%
                     CtrlCentroCusto ctrl = new CtrlCentroCusto();
@@ -82,8 +83,31 @@
                             
                             <td><button type="button" data-toggle="modal" data-target="#view<%=rs.getString("id")%>" class="btn btn-small btn-primary"><spam class="glyphicon glyphicon-eye-open"></spam></button></td>
                             <td><button type="button" data-toggle="modal" data-target="#edit<%=rs.getString("id")%>" class="btn btn-small btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></button></td>                        
+                            <td><button type="button" data-toggle="modal" data-target="#excluir<%=rs.getString("id")%>" class="btn btn-small btn-danger"><spam class="glyphicon glyphicon-remove"></spam></button></td>
                         </tr>
                         <!-- Modal -->
+                        <div id="excluir<%=rs.getString("id")%>" class="modal fade" role="dialog">	
+                          <div class="modal-dialog">	
+                            <!-- Modal content-->	
+                            <div class="modal-content">	
+                              <div class="modal-header">	
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>	
+                                <h4 class="modal-title">Dejesa excluir <%=rs.getString("nome")%> ?</h4>	
+                              </div>	
+                              	
+                              <div class="modal-footer">	
+                                	
+                                  <form method="post" action="sql.jsp">	
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>	
+                                    <input type="hidden" name="id" value='<%=rs.getString("id")%>'>	
+                                    <input type="hidden" name="action" value='excluirCentroCusto'>	
+                                    <button type="submit" class="btn btn-danger" >Sim</button>	
+                                 </form>	
+                                	
+                              </div>	
+                            </div>	
+                          </div>	
+                        </div>
                         <div id="edit<%=rs.getString("id")%>" class="modal fade" role="dialog">
                           <div class="modal-dialog">
                             <!-- Modal content-->

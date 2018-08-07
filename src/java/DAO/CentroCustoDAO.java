@@ -24,7 +24,24 @@ public class CentroCustoDAO {
     Statement stmt;
     PreparedStatement ps;
     
-            
+    public String mudarStatusCc(CentroCusto c) throws SQLException{
+        String r = "";	
+        String query = ("UPDATE tblCentroCusto SET ativo=?  WHERE id=?"); 	
+        	
+        //Cadastra usuario	
+        ps = con.prepareStatement(query);	
+        ps.setString(1, "0");	
+        ps.setString(2, c.getId());	
+       	
+        try {	
+            ps.executeUpdate();	
+            r = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Centro de Custo foi excluido.</h4></div><br>";            	
+        } catch (Exception ex) {	
+            System.out.println("Erro ao Cadastrar: " + ex.toString());	
+           r = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Erro ao excluir: " +ex.toString()+".</h4></div><br>";	
+        }	
+        return r;
+    }        
     public ResultSet selectFiltro(CentroCusto c){
         ResultSet rs;
         try{

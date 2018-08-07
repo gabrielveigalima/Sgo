@@ -40,5 +40,9 @@ public class CtrlCentroCusto {
     }
     public ResultSet selectFiltro(CentroCusto c){
         return dao.selectFiltro(c);
+    } 
+    
+    public String mudarStatusCC(CentroCusto e) throws SQLException{
+        return dao.mudarStatusCc(e);
     }
 }
