@@ -34,4 +34,7 @@ public class CtrlColaborador {
         
         return dao.editarColaborador(cola, cc);
     }
+    public String mudarStatusColaborador(Colaborador c) throws SQLException{	
+       return dao.mudarStatusColaborador(c);	
+    }
 }

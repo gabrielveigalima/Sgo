@@ -65,7 +65,7 @@ if(action.equals("editCentroCusto")){
     
     colaborador.setId(idColaborador);
    
-    //msg = crtlcolaborador.mudarStatusColaborador(colaborador);
+    msg = crtlcolaborador.mudarStatusColaborador(colaborador);
     sessao.setAttribute("msg", msg);
 
     %>

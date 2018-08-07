@@ -24,6 +24,27 @@ public class ColaboradorDAO {
     
     Statement stmt;
     PreparedStatement ps;
+    
+    public String mudarStatusColaborador(Colaborador cola) throws SQLException{	
+        String r = "";	
+        String query = ("UPDATE tblColaborador SET ativo=?  WHERE id=?"); 	
+        	
+        //Cadastra usuario	
+        ps = con.prepareStatement(query);	
+        ps.setString(1, "0");	
+        ps.setString(2, cola.getId());	
+       	
+        	
+        try {	
+            ps.executeUpdate();	
+            r = "<div class='bg-success'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Colaborador foi excluido.</h4></div><br>";            	
+        } catch (Exception ex) {	
+            System.out.println("Erro ao Cadastrar: " + ex.toString());	
+           r = "<div class='bg-danger'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Erro ao excluir: " +ex.toString()+".</h4></div><br>";	
+        }	
+        return r;	
+    }
+       
     public String editarColaborador(Colaborador cola, CentroCusto cc) throws SQLException{
         String r = "";
         String query = ("UPDATE tblColaborador SET nome=? , matricula=? , "
