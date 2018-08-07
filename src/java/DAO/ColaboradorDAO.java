@@ -110,11 +110,8 @@ public class ColaboradorDAO {
     public ResultSet listar(){
         ResultSet rs = null;
         try{
-<<<<<<< HEAD
             String sql = "SELECT * FROM tblColaborador WHERE ativo='1'  ORDER BY id DESC";
-=======
-            String sql = "SELECT * FROM tblColaborador";
->>>>>>> parent of d3e71e8... excluindo (ocultando) Colaborador
+
             ps = con.prepareStatement(sql);     
             rs = ps.executeQuery();
         

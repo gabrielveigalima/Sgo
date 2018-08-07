@@ -14,8 +14,8 @@
 <%@page import="controller.CtrlCentroCusto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<html><head>
+<c:import url="seguranca.jsp"></c:import>
+<c:import url="head.jsp"></c:import>
         <title>Centro de Custo - Operacional - SGO</title>
     </head>
     <body>
@@ -102,9 +102,9 @@
                                       <input name="nomeC" type="text" class="form-control" placeholder="Centro de Custo" value="<%=rs.getString("nome")%>">
                                       <label>Intinere:</label>
                                       <input name="intinere" type="text" class="form-control" placeholder="Intinere:" value="<%
-                                    if(!rs.getString("intinere").equals("NULL")){
-                                        %><%=rs.getString("intinere")%><%
-                                    } %>">
+                                    //if(rs.getString("intinere") != null){
+                                        
+                                    //} %>">
                                     </div>
                                     <button type="submit" class="btn btn-success">Salvar</button>
                                   </form>
@@ -128,11 +128,12 @@
                                 <p>Nome: <%=rs.getString("nome")%></p>
                                 <p>Criação: <%=rs.getString("dateCreate").replaceAll("-","/")%></p>
                                 <p>Intinere: <%
-                                    if(rs.getString("intinere").equals("NULL")){
+                                    //if(rs.getString("intinere") != null){
+                                        %><%=rs.getString("intinere")%><%    
+                                    //}else{
                                         %>Não tem intinere<%
-                                    }else{
-                                        %><%=rs.getString("intinere")%><%
-                                    }
+                                   // }
+}
                                 %>
                                 </p>
                                 <p>Criador: 

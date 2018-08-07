@@ -42,7 +42,6 @@ String name,email,nivel,pws,nomeC,status,id,redefinir;
 
 String idUser = sessao.getAttribute("id").toString();
 
-<<<<<<< HEAD
 if(action.equals("editCentroCusto")){
     String idCc = request.getParameter("id");
     name = Normalizer.normalize(request.getParameter("nomeC"), 
@@ -64,11 +63,9 @@ if(action.equals("editCentroCusto")){
 } else if(action.equals("excluirColaborador")){
     String idColaborador = request.getParameter("id");
     
-    
     colaborador.setId(idColaborador);
-    
-    
-    msg = crtlcolaborador.mudarStatusColaborador(colaborador);
+   
+    //msg = crtlcolaborador.mudarStatusColaborador(colaborador);
     sessao.setAttribute("msg", msg);
 
     %>
@@ -76,9 +73,6 @@ if(action.equals("editCentroCusto")){
     <%
     
 } else if(action.equals("editColaborador")){
-=======
-if(action.equals("editColaborador")){
->>>>>>> parent of d3e71e8... excluindo (ocultando) Colaborador
     String idColaborador = request.getParameter("id");
     name = Normalizer.normalize(request.getParameter("nomeU"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
@@ -96,10 +90,10 @@ if(action.equals("editColaborador")){
     
     msg = crtlcolaborador.editarColaborador(colaborador, cen);
     sessao.setAttribute("msg", msg);
-
     %>
         <c:redirect url="listColaborador.jsp"></c:redirect>
     <%
+    
     
 } else if(action.equals("cadColaborador")){
     name = Normalizer.normalize(request.getParameter("nome"), 
