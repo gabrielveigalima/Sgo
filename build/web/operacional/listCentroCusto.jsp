@@ -102,9 +102,12 @@
                                       <input name="nomeC" type="text" class="form-control" placeholder="Centro de Custo" value="<%=rs.getString("nome")%>">
                                       <label>Intinere:</label>
                                       <input name="intinere" type="text" class="form-control" placeholder="Intinere:" value="<%
-                                    //if(rs.getString("intinere") != null){
-                                        
-                                    //} %>">
+                                        if(rs.getString("intinere") != null){
+                                            if(!rs.getString("intinere").equals("NULL")){
+                                                %> <%=rs.getString("intinere")%> <%
+                                            }                                         
+                                        }
+                                      %>">
                                     </div>
                                     <button type="submit" class="btn btn-success">Salvar</button>
                                   </form>
@@ -128,13 +131,18 @@
                                 <p>Nome: <%=rs.getString("nome")%></p>
                                 <p>Criação: <%=rs.getString("dateCreate").replaceAll("-","/")%></p>
                                 <p>Intinere: <%
-                                    //if(rs.getString("intinere") != null){
-                                        %><%=rs.getString("intinere")%><%    
-                                    //}else{
-                                        %>Não tem intinere<%
-                                   // }
-}
-                                %>
+                                if(rs.getString("intinere") != null){
+                                    if(rs.getString("intinere").equals("NULL")){
+                                        %> Não tem intinere <%
+                                    }else{
+                                        %> <%=rs.getString("intinere")%> <%
+                                    }
+
+                                }else{
+                                    %> Não tem intinere <%
+                                } 
+                                   %>
+                                       
                                 </p>
                                 <p>Criador: 
                                 <%
