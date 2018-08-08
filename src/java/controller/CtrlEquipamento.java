@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.EquipamentoDAO;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Equipamento;
 
@@ -17,5 +18,9 @@ public class CtrlEquipamento {
     EquipamentoDAO dao = new EquipamentoDAO();
      public String cadastrarEquipamneto(Equipamento e, String id) throws SQLException{
         return dao.cadastrarEquipamneto(e,id);
+    }
+     
+    public ResultSet selecionarEquipamnetoAtivo(){
+        return dao.selectEquipamentoAtivo();
     }
 }

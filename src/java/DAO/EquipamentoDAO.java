@@ -69,5 +69,23 @@ public class EquipamentoDAO {
         }
     }
     
+    public ResultSet selectEquipamentoAtivo(){
+        ResultSet rs;
+        try{
+        String sql = "SELECT * FROM tblEquipamento WHERE ativo=? ORDER BY idEquipamneto DESC";
+        ps = con.prepareStatement(sql);        
+        ps.setString(1, "1");
+                
+        rs = ps.executeQuery();
+        
+        }catch (SQLException e){
+            e.printStackTrace();
+            System.err.println("Erro ao selecionar Centro de custo: "+e.toString());
+            rs = null;
+        }
+        
+        return rs;
+    }
+    
     
 }
