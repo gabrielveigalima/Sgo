@@ -98,7 +98,7 @@
                                   <form method="post" action="sql.jsp">	
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>	
                                     <input type="hidden" name="id" value='<%=rs.getString("idEquipamneto")%>'>	
-                                    <input type="hidden" name="action" value='excluirCentroCusto'>	
+                                    <input type="hidden" name="action" value='excluirEquipamneto'>	
                                     <button type="submit" class="btn btn-danger" >Sim</button>	
                                  </form>	
                                 	

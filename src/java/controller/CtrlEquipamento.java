@@ -27,4 +27,7 @@ public class CtrlEquipamento {
     public String editarEquipamentoAtivo(Equipamento e) throws SQLException{
         return dao.editarEquipamentoAtivo(e);
     }
+    public String mudarStatusE(Equipamento e) throws SQLException{
+        return dao.mudarStatusE(e);
+    }
 }
