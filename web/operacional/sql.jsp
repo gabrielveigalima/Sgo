@@ -42,7 +42,25 @@ String name,email,nivel,pws,nomeC,status,id,redefinir;
 
 String idUser = sessao.getAttribute("id").toString();
 
-if(action.equals("editCentroCusto")){
+if(action.equals("editEquipamento")){
+    String idCc = request.getParameter("id");
+    name = Normalizer.normalize(request.getParameter("nome"), 
+        Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").
+        replaceAll(" ", "").toUpperCase();
+   
+    
+    e.setId(idCc);
+    e.setName(name);
+    
+    
+    msg = ctrlEquipamento.editarEquipamentoAtivo(e);
+    sessao.setAttribute("msg", msg);
+
+    %>
+        <c:redirect url="listEquipamento.jsp"></c:redirect>
+    <%
+    
+} else if(action.equals("editCentroCusto")){
     String idCc = request.getParameter("id");
     name = Normalizer.normalize(request.getParameter("nomeC"), 
         Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").

@@ -116,14 +116,11 @@
                               </div>
                               <div class="modal-body">
                                   <form method="post" action="sql.jsp">
-                                    <input type="hidden" name="action" value='editCentroCusto'>
+                                    <input type="hidden" name="action" value='editEquipamento'>
                                     <input type="hidden" name="id" value='<%=rs.getString("idEquipamneto")%>'>
-                                    
                                     <div class="form-group">
                                       <label>Nome:</label>
-                                      <input name="nomeC" type="text" class="form-control" placeholder="Centro de Custo" value="<%=rs.getString("nome")%>">
-                                      <label>Intinere:</label>
-                                      <input name="intinere" type="text" class="form-control" placeholder="Intinere:" >
+                                      <input name="nome" type="text" class="form-control" placeholder="Centro de Custo" value="<%=rs.getString("nome")%>">
                                     </div>
                                     <button type="submit" class="btn btn-success">Salvar</button>
                                   </form>
@@ -146,9 +143,6 @@
                               <div class="modal-body">
                                 <p>Nome: <%=rs.getString("nome")%></p>
                                 <p>Criação: <%=rs.getString("dateCreate").replaceAll("-","/")%></p>
-                                <p>Intinere: 
-                                       
-                                </p>
                                 <p>Criador: 
                                 <% 
                                 User u = new User();

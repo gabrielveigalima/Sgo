@@ -23,4 +23,8 @@ public class CtrlEquipamento {
     public ResultSet selecionarEquipamnetoAtivo(){
         return dao.selectEquipamentoAtivo();
     }
+    
+    public String editarEquipamentoAtivo(Equipamento e) throws SQLException{
+        return dao.editarEquipamentoAtivo(e);
+    }
 }

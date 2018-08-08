@@ -10,7 +10,15 @@ package model;
  * @author gabriel.lima
  */
 public class Equipamento {
-    String name;
+    String name,id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
