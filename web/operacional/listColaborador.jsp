@@ -76,6 +76,7 @@
                         <th>Nome</th>
                         <th>Matrícula</th>
                         <th>Status</th>
+                        <th>Lançar Ponto</th>
                         <th>Mais</th>
                         <th>Editar</th>
                         <th>Excluir</th>
@@ -136,9 +137,10 @@
                                 }
                                 %>
                             </td>
-                            <td><button type="button" data-toggle="modal" data-target="#view<%=rs.getString("id")%>" class="btn btn-small btn-primary"><spam class="glyphicon glyphicon-eye-open"></spam></button></td>
-                            <td><button type="button" data-toggle="modal" data-target="#edit<%=rs.getString("id")%>" class="btn btn-small btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></button></td>                        
-                            <td><button type="button" data-toggle="modal" data-target="#excluir<%=rs.getString("id")%>" class="btn btn-small btn-danger"><spam class="glyphicon glyphicon-remove"></spam></button></td>
+                            <td><a title="Lançar folha de ponto" type="button"  href="ponto.jsp?id=<%=rs.getString("id")%>" class="btn btn-small btn-success"><spam class="glyphicon glyphicon-th-list"></spam></a></td>
+                            <td><button title="Ver mais" type="button" data-toggle="modal" data-target="#view<%=rs.getString("id")%>" class="btn btn-small btn-primary"><spam class="glyphicon glyphicon-eye-open"></spam></button></td>
+                            <td><button title="Editar coloborador" type="button" data-toggle="modal" data-target="#edit<%=rs.getString("id")%>" class="btn btn-small btn-warning"><spam class="glyphicon glyphicon-pencil"></spam></button></td>                        
+                            <td><button title="Excluir colaborador" type="button" data-toggle="modal" data-target="#excluir<%=rs.getString("id")%>" class="btn btn-small btn-danger"><spam class="glyphicon glyphicon-remove"></spam></button></td>
                         </tr>
                         <!-- Modal -->
                         <div id="edit<%=rs.getString("id")%>" class="modal fade" role="dialog">
