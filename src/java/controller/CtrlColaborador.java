@@ -19,6 +19,7 @@ public class CtrlColaborador {
     ColaboradorDAO dao = new ColaboradorDAO();
     Colaborador cola = new Colaborador();
     CentroCusto cc = new CentroCusto();
+    
     public String cadastrarColaborador(Colaborador cola, CentroCusto cc, String id) throws SQLException{
         return dao.cadastrarColaborador(cc, cola, id);
     }
@@ -29,6 +30,9 @@ public class CtrlColaborador {
     
     public ResultSet selectFiltro(Colaborador c, CentroCusto cc) throws SQLException{
        return dao.selecFiltro(c,cc);
+    }
+    public ResultSet selectId(Colaborador c) throws SQLException{
+       return dao.selectId(c);
     }
     public String editarColaborador(Colaborador cola, CentroCusto cc) throws SQLException{
         

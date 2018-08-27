@@ -20,7 +20,6 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="index.jsp">Home</a></li>
-          <li><a href="ponto.jsp">Ponto</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Colaborador <span class="caret"></span></a>
             <ul class="dropdown-menu">

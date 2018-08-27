@@ -128,6 +128,23 @@ public class ColaboradorDAO {
         return rs;
     }
     
+    public ResultSet selectId(Colaborador c){
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT * FROM tblColaborador WHERE ativo='1' AND id=?";
+
+            ps = con.prepareStatement(sql);     
+            ps.setString(1, c.getId());
+            rs = ps.executeQuery();
+        
+        }catch (SQLException e){
+            e.printStackTrace();
+            System.err.println("Erro ao selecionar Colaborador: "+e.toString());
+            rs = null;
+        }
+        return rs;
+    }
+    
     public ResultSet listar(){
         ResultSet rs = null;
         try{
