@@ -33,22 +33,21 @@
     Ponto p = new Ponto();
     String ccc = "";
 
-    if(request.getParameter("cc") != null){ // verifica de o usuario está lançando ponto para o colaborador        
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        String data = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+    if(request.getParameter("cc") != null){ // verifica de o usuario está lançando ponto para o colaborador   
+        
         cc.setId(request.getParameter("cc"));
         c.setId(request.getParameter("id"));
-        p.setDate(data);//request.getParameter("mes"));
+        p.setDate(request.getParameter("mes"));
         p.setHoraInicio(request.getParameter("hInicio"));
         p.setHoraFim(request.getParameter("hFim"));
 
         String msg = ctrlPonto.cadastrarPonto(p, cc, c, idUser);
+        
         sessao.setAttribute("msg", msg);
 
     }
     if(request.getParameter("id") == null){//Verificar se está vindo o id do colaborador pela url
         sessao.setAttribute("msg", "<div class='bg-warning'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Você precisa selecionar um colaborador.</h4></div><br>");
-        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
     %>
         <script language= "JavaScript">
             location.href="listColaborador.jsp";
@@ -56,18 +55,13 @@
     <%
     }else{
         CtrlColaborador crtrlColaborador = new CtrlColaborador();
-        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         c.setId(request.getParameter("id"));
-        
-        ResultSet cli = crtrlColaborador.selectId(request.getParameter("id"));
-        
+        ResultSet cli = crtrlColaborador.selectId(request.getParameter("id"));// Seleciona colaborador pelo id
         if(cli.next()){
            ccc = cli.getString("centroCusto");
             %>
-            
             <script>
                 var nome = '<%= cli.getString("nome")%>';
-
                 var id = '<%= cli.getString("id")%>';
             </script>
             <%
@@ -83,7 +77,7 @@
                 <c:if test="${not empty sessionScope.msg}">
                     ${sessionScope.msg}
                     <%
-                        //sessao.setAttribute("msg", null);
+                        sessao.setAttribute("msg", null);
                     %>
                 </c:if>
             </h1>
