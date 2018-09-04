@@ -4,6 +4,8 @@
     Author     : gabriel.lima
 --%>
 
+<%@page import="java.util.Calendar"%>
+<%@page import="controller.CtrlPonto"%>
 <%@page import="model.Ponto"%>
 <%@page import="model.CentroCusto"%>
 <%@page import="model.Colaborador"%>
@@ -19,47 +21,59 @@
 <%@page import="controller.CtrlEquipamento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-   HttpSession sessao = request.getSession(); 
-%>
+
 <c:import url="seguranca.jsp"></c:import>
 <c:import url="head.jsp"></c:import>
- <%
-            Colaborador c = new Colaborador();
-            CentroCusto cc = new CentroCusto();
-            Ponto p = new Ponto();
-            
-            if(request.getParameter("cc") == null){ // verifica de o usuario está lançando ponto para o colaborador            
-            cc.setId(request.getParameter("cc"));
-            c.setId(request.getParameter("id"));
-            p.setDate(request.getParameter("mes"));
-            p.setHoraInicio(request.getParameter("hInicio"));
-            p.setHoraFim(request.getParameter("hFim"));
-            }
-            if(request.getParameter("id") == null){//Verificar se está vindo o id do colaborador pela url
-                sessao.setAttribute("msg", "<div class='bg-warning'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Você precisa selecionar um colaborador.</h4></div><br>");
-            %>
-                <script language= "JavaScript">
-                    location.href="listColaborador.jsp";
-                </script>
-            <%
-            }else{
-                CtrlColaborador crtrlColaborador = new CtrlColaborador();
-                
-                c.setId(request.getParameter("id"));
-                ResultSet cli = crtrlColaborador.selectId(c);
+<%
+    HttpSession sessao = request.getSession(); 
+    String idUser = sessao.getAttribute("id").toString();
+    CtrlPonto ctrlPonto = new CtrlPonto(); 
+    Colaborador c = new Colaborador();
+    CentroCusto cc = new CentroCusto();
+    Ponto p = new Ponto();
+    String ccc = "";
 
-                if(cli.next()){
-                    %>
-                    <script>
-                        var nome = '<%= cli.getString("nome") %>'
-                        var cc = '<%= cli.getString("centroCusto") %>'
-                        var id = '<%= cli.getString("id") %>'
-                    </script>
-                    <%
-                }
-            }
-        %>
+    if(request.getParameter("cc") != null){ // verifica de o usuario está lançando ponto para o colaborador        
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        String data = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+        cc.setId(request.getParameter("cc"));
+        c.setId(request.getParameter("id"));
+        p.setDate(data);//request.getParameter("mes"));
+        p.setHoraInicio(request.getParameter("hInicio"));
+        p.setHoraFim(request.getParameter("hFim"));
+
+        String msg = ctrlPonto.cadastrarPonto(p, cc, c, idUser);
+        sessao.setAttribute("msg", msg);
+
+    }
+    if(request.getParameter("id") == null){//Verificar se está vindo o id do colaborador pela url
+        sessao.setAttribute("msg", "<div class='bg-warning'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Você precisa selecionar um colaborador.</h4></div><br>");
+        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+    %>
+        <script language= "JavaScript">
+            location.href="listColaborador.jsp";
+        </script>
+    <%
+    }else{
+        CtrlColaborador crtrlColaborador = new CtrlColaborador();
+        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+        c.setId(request.getParameter("id"));
+        
+        ResultSet cli = crtrlColaborador.selectId(request.getParameter("id"));
+        
+        if(cli.next()){
+           ccc = cli.getString("centroCusto");
+            %>
+            
+            <script>
+                var nome = '<%= cli.getString("nome")%>';
+
+                var id = '<%= cli.getString("id")%>';
+            </script>
+            <%
+        }
+    }
+%>
         <title>Gerar ponto - Operacional - SGO</title>
     </head>
     <body>
@@ -69,7 +83,7 @@
                 <c:if test="${not empty sessionScope.msg}">
                     ${sessionScope.msg}
                     <%
-                        sessao.setAttribute("msg", null);
+                        //sessao.setAttribute("msg", null);
                     %>
                 </c:if>
             </h1>
@@ -86,7 +100,7 @@
                       <h4 class="modal-title">Gerar ponto para <script> document.write(nome); </script> ?</h4>	
                     </div>	
                     <form method="post"  action='ponto.jsp?id=<%=request.getParameter("id")%>' >
-                        <input type="hidden" value="<script> document.write(cc); </script>" name="cc">
+                        <input type="hidden" value="<%= ccc %>" name="cc">
                         <div class="modal-body">
                             <div class="form-group">
                                 <div class="form-group has-error">
@@ -145,26 +159,7 @@
             </div>
        
             <div class="container">
-                <%
-                if(request.getParameter("data") != null){
-                    String data = request.getParameter("data");
-                    DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
-                    df.setLenient (false); // aqui o pulo do gato
-                    try {
-                        df.parse (data);
-                        // data válida
-                        %>
-                       <p>Bom</p> 
-                        <%
-                    } catch (ParseException ex) {
-                       // data inválida
-                       %>
-                       <%=ex.toString()%>
-                       <p>Merda</p> 
-                        <%
-                    }
-                }    
-                %>
+              
                 
             </div>
         </div>

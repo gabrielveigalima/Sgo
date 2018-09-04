@@ -5,13 +5,23 @@
  */
 package controller;
 
+import DAO.PontoDAO;
+import java.sql.SQLException;
+import model.CentroCusto;
+import model.Colaborador;
+import model.Ponto;
+
 
 /**
  *
  * @author gabriel.lima
  */
 public class CtrlPonto {
-   
+    
+    PontoDAO dao = new PontoDAO();
+    public String cadastrarPonto(Ponto p, CentroCusto cc, Colaborador c, String id) throws SQLException{
+        return dao.cadastrarPonto(p, cc, c, id);
+    }
     
     
 }

@@ -31,7 +31,7 @@ public class CtrlColaborador {
     public ResultSet selectFiltro(Colaborador c, CentroCusto cc) throws SQLException{
        return dao.selecFiltro(c,cc);
     }
-    public ResultSet selectId(Colaborador c) throws SQLException{
+    public ResultSet selectId(String c) throws SQLException{
        return dao.selectId(c);
     }
     public String editarColaborador(Colaborador cola, CentroCusto cc) throws SQLException{

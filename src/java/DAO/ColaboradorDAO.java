@@ -128,13 +128,13 @@ public class ColaboradorDAO {
         return rs;
     }
     
-    public ResultSet selectId(Colaborador c){
+    public ResultSet selectId(String c){
         ResultSet rs = null;
         try{
             String sql = "SELECT * FROM tblColaborador WHERE ativo='1' AND id=?";
 
             ps = con.prepareStatement(sql);     
-            ps.setString(1, c.getId());
+            ps.setString(1, c);
             rs = ps.executeQuery();
         
         }catch (SQLException e){
