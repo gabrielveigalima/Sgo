@@ -83,7 +83,10 @@
             </h1>
             <div class="container jumbotron">
                 <h4 class="text-center">Gerar ponto para <script> document.write(nome); </script></h4>
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gerarPonto">Gerar Ponto</button>                
+                <center>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gerarPonto">Gerar Ponto</button>  
+                <button onclick="abreVerPonto()" href="verPonto.jsp?id=" class="btn btn-success">Ver Ponto</button>
+                </center>
             </div>
             <div id="gerarPonto" class="modal fade" role="dialog">	
                 <div class="modal-dialog">	
@@ -157,5 +160,10 @@
                 
             </div>
         </div>
+        <script language= "JavaScript">
+            function abreVerPonto(){
+                location.href='verPonto.jsp?id='+id;
+            }
+        </script>
 <c:import url="footer.jsp"></c:import>
 
