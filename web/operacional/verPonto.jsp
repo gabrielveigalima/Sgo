@@ -5,13 +5,15 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:import url="seguranca.jsp"></c:import>
+<c:import url="head.jsp"></c:import>
+
+    <title>Ver Ponto - Operacional - SGO</title>
     </head>
     <body>
+        <c:import url="navbar.jsp"></c:import>  
+    <body>
         <h1>Hello World!</h1>
-    </body>
-</html>
+    <c:import url="footer.jsp"></c:import>
