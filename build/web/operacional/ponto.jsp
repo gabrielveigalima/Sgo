@@ -86,6 +86,7 @@
                 <center>
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gerarPonto">Gerar Ponto</button>  
                 <button onclick="abreVerPonto()" href="verPonto.jsp?id=" class="btn btn-success">Ver Ponto</button>
+                <button onclick="gerarPdf()"  class="btn btn-success">Gerar PDF</button>
                 </center>
             </div>
             <div id="gerarPonto" class="modal fade" role="dialog">	
@@ -158,10 +159,19 @@
               
             </div>
         </div>
+        
         <script language= "JavaScript">
             function abreVerPonto(){
                 location.href='verPonto.jsp?id='+id;
             }
+            function gerarPdf(){
+                var doc = new jsPDF()
+
+                doc.text('Hello world!', 10, 10)
+                doc.save(nome+'.pdf')
+            }
         </script>
+        <script src="../js/jspdf.min.js"></script>
+
 <c:import url="footer.jsp"></c:import>
 

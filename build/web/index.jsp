@@ -46,11 +46,8 @@
           <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Digite seu email..." required autofocus>
           <label for="inputPassword" class="sr-only">Senha</label>
           <input type="password" name="pws" id="inputPassword" class="form-control" placeholder="Digite sua senha..." required>
-
           <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar <samp class="glyphicon glyphicon-log-in"></samp></button>
-          
         </form>
-        <a class="text-center" href="esqueceu-senha.jsp"><p class="text-center" >Esquceu a senha?</p></a>
     </div> <!-- /container -->
 
 
