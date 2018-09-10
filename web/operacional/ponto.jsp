@@ -156,7 +156,10 @@
                 </div>	
             </div>
             <div class="container">
-              
+                <%
+                   
+                %>
+                <div class="col-md-6 jumbotron"></div>
             </div>
         </div>
         
@@ -167,7 +170,7 @@
             function gerarPdf(){
                 var doc = new jsPDF()
 
-                doc.text('Hello world!', 10, 10)
+                doc.text(10, 10, '<h1><strong>Hello world!</strong></h1>')
                 doc.save(nome+'.pdf')
             }
         </script>

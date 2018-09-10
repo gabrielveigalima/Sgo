@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.PontoDAO;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.CentroCusto;
 import model.Colaborador;
@@ -22,6 +23,8 @@ public class CtrlPonto {
     public String cadastrarPonto(Ponto p, CentroCusto cc, Colaborador c, String id) throws SQLException{
         return dao.cadastrarPonto(p, cc, c, id);
     }
-    
+    public ResultSet listarMes(String id) throws SQLException{
+        return dao.listarMes(id);
+    }
     
 }
