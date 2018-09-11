@@ -84,9 +84,8 @@
             <div class="container jumbotron">
                 <h4 class="text-center">Gerar ponto para <script> document.write(nome); </script></h4>
                 <center>
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gerarPonto">Gerar Ponto</button>  
-                <button onclick="abreVerPonto()" href="verPonto.jsp?id=" class="btn btn-success">Ver Ponto</button>
-                <button onclick="gerarPdf()"  class="btn btn-success">Gerar PDF</button>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gerarPonto">Gerar Ponto</button>                  
+                <button onclick="gerarPdf()"  class="btn btn-danger">Gerar PDF <span class="glyphicon glyphicon-file"></span></button>
                 </center>
             </div>
             <div id="gerarPonto" class="modal fade" role="dialog">	
@@ -161,9 +160,9 @@
                  while(rs.next()){
                 %>
                 <div class="col-md-5 jumbotron ls">
-                <%=rs.getString("mes")%>/<%=rs.getString("ano")%>
-                <br>
-                <%=rs.getString("id")%>
+                    <%=rs.getString("mes")%>/<%=rs.getString("ano")%>
+                    <br>
+                    <button onclick="abreVerPonto(<%=rs.getString("id")%>)" class="btn btn-warning">Ver Ponto <span class="glyphicon glyphicon-eye-open"></span></button>
                 </div>
                 <div class="col-md-2"></div>
                 <%
@@ -173,8 +172,8 @@
         </div>
         
         <script language= "JavaScript">
-            function abreVerPonto(){
-                location.href='verPonto.jsp?id='+id;
+            function abreVerPonto(idponto){
+                location.href='verPonto.jsp?id='+idponto;
             }
             function gerarPdf(){
                 var doc = new jsPDF()
