@@ -157,9 +157,18 @@
             </div>
             <div class="container">
                 <%
-                   
+                 ResultSet rs = ctrlPonto.listarMes(request.getParameter("id"));
+                 while(rs.next()){
                 %>
-                <div class="col-md-6 jumbotron"></div>
+                <div class="col-md-5 jumbotron ls">
+                <%=rs.getString("mes")%>/<%=rs.getString("ano")%>
+                <br>
+                <%=rs.getString("id")%>
+                </div>
+                <div class="col-md-2"></div>
+                <%
+                }
+                %>
             </div>
         </div>
         
