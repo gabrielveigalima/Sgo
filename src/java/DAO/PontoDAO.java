@@ -143,9 +143,21 @@ public class PontoDAO {
         return rs; 
     }
     
-    public ResultSet listarMes(String id) throws SQLException{
+    public ResultSet listarMeses(String id) throws SQLException{
         ResultSet rs = null;
         ps = con.prepareStatement("SELECT * FROM tblPonto WHERE id_colaborador=? ORDER BY id DESC");
+        ps.setString(1, id);   
+        try {
+            rs = ps.executeQuery();
+        }catch (Exception ex) {
+            System.err.println("Erro ao selecionar: " + ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet listarHoras(String id) throws SQLException{
+        ResultSet rs = null;
+        ps = con.prepareStatement("SELECT * FROM tblHoras WHERE id_ponto=? ORDER BY id DESC");
         ps.setString(1, id);   
         try {
             rs = ps.executeQuery();

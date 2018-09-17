@@ -84,8 +84,7 @@
             <div class="container jumbotron">
                 <h4 class="text-center">Gerar ponto para <script> document.write(nome); </script></h4>
                 <center>
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gerarPonto">Gerar Ponto</button>                  
-                <button onclick="gerarPdf()"  class="btn btn-danger">Gerar PDF <span class="glyphicon glyphicon-file"></span></button>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gerarPonto">Gerar Ponto</button>  
                 </center>
             </div>
             <div id="gerarPonto" class="modal fade" role="dialog">	
@@ -156,11 +155,11 @@
             </div>
             <div class="container">
                 <%
-                 ResultSet rs = ctrlPonto.listarMes(request.getParameter("id"));
+                 ResultSet rs = ctrlPonto.listarMeses(request.getParameter("id"));
                  while(rs.next()){
                 %>
                 <div class="col-md-5 jumbotron ls">
-                    <%=rs.getString("mes")%>/<%=rs.getString("ano")%>
+                    <h2><%=rs.getString("mes")%>/<%=rs.getString("ano")%></h2>
                     <br>
                     <button onclick="abreVerPonto(<%=rs.getString("id")%>)" class="btn btn-warning">Ver Ponto <span class="glyphicon glyphicon-eye-open"></span></button>
                 </div>
@@ -170,19 +169,10 @@
                 %>
             </div>
         </div>
-        
         <script language= "JavaScript">
             function abreVerPonto(idponto){
                 location.href='verPonto.jsp?id='+idponto;
             }
-            function gerarPdf(){
-                var doc = new jsPDF()
-
-                doc.text(10, 10, '<h1><strong>Hello world!</strong></h1>')
-                doc.save(nome+'.pdf')
-            }
         </script>
-        <script src="../js/jspdf.min.js"></script>
-
 <c:import url="footer.jsp"></c:import>
 

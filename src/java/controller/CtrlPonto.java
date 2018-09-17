@@ -23,8 +23,10 @@ public class CtrlPonto {
     public String cadastrarPonto(Ponto p, CentroCusto cc, Colaborador c, String id) throws SQLException{
         return dao.cadastrarPonto(p, cc, c, id);
     }
-    public ResultSet listarMes(String id) throws SQLException{
-        return dao.listarMes(id);
+    public ResultSet listarMeses(String id) throws SQLException{
+        return dao.listarMeses(id);
     }
-    
+    public ResultSet listarHoras(String id) throws SQLException{
+        return dao.listarHoras(id);
+    }
 }
