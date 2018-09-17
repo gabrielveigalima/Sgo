@@ -149,20 +149,21 @@
                             <th>Nome</th>
                             <th>Nível</th>                                                 
                         </tr>
-                        <tr>
+                        
                 <%
                  ResultSet rs = ctrlPonto.listarHoras(request.getParameter("id"));
                  while(rs.next()){
                 %>
-                <td><%=rs.getString("date")%></td>
-                <td><%=rs.getString("hora_inicio")%></td>
+                <tr>
+                    <td><%=rs.getString("id")%></td>
+                </tr>
                 
                 <%
                 }
                 %>
-                        </tr>
+                        
                     </table>
-                <button onclick="abreVerPonto(<%=rs.getString("id")%>)" class="btn btn-warning">Ver Ponto <span class="glyphicon glyphicon-eye-open"></span></button>
+                <button onclick="abreVerPonto()" class="btn btn-warning">Ver Ponto <span class="glyphicon glyphicon-eye-open"></span></button>
                 </div>
             </div>
         </div>
