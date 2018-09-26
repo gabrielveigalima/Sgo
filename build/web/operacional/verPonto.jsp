@@ -33,7 +33,7 @@
     Ponto p = new Ponto();
     String ccc = "";
 
-    if(request.getParameter("id") == null){//Verificar se está vindo o id do colaborador pela url
+    if(request.getParameter("id") == null && request.getParameter("nome") == null){//Verificar se está vindo o id do colaborador pela url
         sessao.setAttribute("msg", "<div class='bg-warning'><h4 class='text-center' style='padding-top:10px; padding-bottom:5px'>Você precisa selecionar o ponto.</h4></div><br>");
     %>
         <script language= "JavaScript">
@@ -48,7 +48,7 @@
            ccc = cli.getString("centroCusto");
             %>
             <script>
-                var nome = '<%= cli.getString("nome")%>';
+                var nome = '<%= request.getParameter("nome")%>';
                 var id = '<%= cli.getString("id")%>';
             </script>
             <%
@@ -69,85 +69,20 @@
                 </c:if>
             </h1>
             <div class="container jumbotron">
-                <h4 class="text-center">Gerar ponto para <script> document.write(nome); </script></h4>
-                <center>
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gerarPonto">Gerar Ponto</button>                  
-                <button onclick="gerarPdf()"  class="btn btn-danger">Gerar PDF <span class="glyphicon glyphicon-file"></span></button>
-                </center>
-            </div>
-            <div id="gerarPonto" class="modal fade" role="dialog">	
-                <div class="modal-dialog">	
-                  <!-- Modal content-->	
-                  <div class="modal-content">	
-                    <div class="modal-header">	
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>	
-                      <h4 class="modal-title">Gerar ponto para <script> document.write(nome); </script> ?</h4>	
-                    </div>	
-                    <form method="post"  action='ponto.jsp?id=<%=request.getParameter("id")%>' >
-                        <input type="hidden" value="<%= ccc %>" name="cc">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <div class="form-group has-error">
-                                    <label class="control-label" for="inputWarning1">Mês *</label>
-                                    <select name="mes" class="form-control" id="inputWarning1" required="">
-                                        <option>Escolha o mês</option>
-                                        <option value="01">Janeiro</option>
-                                        <option value="02">Fevereiro</option>
-                                        <option value="03">Março</option>
-                                        <option value="04">Abril</option>
-                                        <option value="05">Maio</option>
-                                        <option value="06">Junho</option>
-                                        <option value="07">Julho</option>
-                                        <option value="08">Agosto</option>
-                                        <option value="09">Setembro</option>
-                                        <option value="10">Outubro</option>
-                                        <option value="11">Novembro</option>
-                                        <option value="12">Dezembro</option>
-                                    </select>
-                                </div>
-                                <label class="control-label">Equipamento</label>
-                                <select class="form-control">
-                                    <option>Escolha o equipamento</option>
-                                    <% 
-                                    CtrlEquipamento ctrlEquipamento = new CtrlEquipamento();
-                                    ResultSet equi = ctrlEquipamento.selecionarEquipamnetoAtivo();
-                                    if(equi.next()){
-                                        %>
-                                            <option value="<%= equi.getString("idEquipamneto") %>"><%= equi.getString("nome") %></option>
-                                        <%
-                                         while(equi.next()){
-                                            %>
-                                            <option value="<%= equi.getString("idEquipamneto") %>"><%= equi.getString("nome") %></option>
-                                            <%
-                                         }
-                                    }else{
-                                        %>
-                                        <option>Não tem centro de custo</option>
-                                        <%
-                                    }
-                                    %>
-                                </select>
-                                <label class="control-label">Hora de início</label>
-                                <input required="" name="hInicio" type="time" placeholder="Digite a hora de início"  class="form-control">
-                                <label class="control-label">Hora de fim</label>
-                                <input name="hFim" type="time" placeholder="Digite a hora de fim"  class="form-control">
-                            </div>
-                        </div>
-                        <div class="modal-footer ">	
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                            <button type="submit" class="btn btn-success" >Sim</button>
-                        </div>
-                    </form>
-                  </div>	
-                </div>	
+                <h4 class="text-center">Ponto de: <%= request.getParameter("nome")%></h4>
+                
             </div>
             <div class="container">
-                <div class="table-responsive">
+                <div class="table-responsive" id="getPdf">
                     <table class="table">
                         <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Nível</th>                                                 
+                            <th>Centro de Custo</th>
+                            <th>Equipamento</th>
+                            <th>Data</th>
+                            <th>Início</th>
+                            <th>Fim</th>
+                            <th>Hora Extra Início</th>
+                            <th>Hora Extra Fim</th>
                         </tr>
                         
                 <%
@@ -155,7 +90,13 @@
                  while(rs.next()){
                 %>
                 <tr>
-                    <td><%=rs.getString("id")%></td>
+                    <td><%=rs.getString("id_centro_custo")%></td>
+                    <td><%=rs.getString("id_equipamento")%></td>
+                    <td><%=rs.getString("date")%></td>
+                    <td><%=rs.getString("hora_inicio").replace(".0000000","")%></td>
+                    <td><%=rs.getString("hora_fim").replace(".0000000","")%></td>
+                    <td><%=rs.getString("hora_extra_incio")%></td>
+                    <td><%=rs.getString("hora_extra_fim")%></td>                    
                 </tr>
                 
                 <%
@@ -163,19 +104,34 @@
                 %>
                         
                     </table>
-                <button onclick="abreVerPonto()" class="btn btn-warning">Ver Ponto <span class="glyphicon glyphicon-eye-open"></span></button>
                 </div>
             </div>
         </div>
-        
+        <div id="testdiv" style="display:none">
+            <div>TEST</div>
+            <div id="hidediv">TEST2</div>
+        </div>
+        <center>    
+            <a href="javascript:genPDF()"  class="btn btn-danger">Gerar PDF <span class="glyphicon glyphicon-file"></span></a>
+        </center>
         <script language= "JavaScript">
-            function abreVerPonto(idponto){
-                location.href='verPonto.jsp?id='+idponto;
+            function genPDF() {
+                var doc = new jsPDF();
+                var specialElementHandlers = {
+                    '#hidediv' : function(element,render) {return true;}
+                };
+
+                doc.fromHTML($('#getPdf').get(0), 20,5,{
+                             'width':500,
+                                    'elementHandlers': specialElementHandlers
+                });
+
+                    doc.save('<%= request.getParameter("nome")%>_Ponto.pdf');
             }
             function gerarPdf(){
-                var doc = new jsPDF()
-
-                doc.text(10, 10, '<h1><strong>Hello world!</strong></h1>')
+                var doc = new jsPDF();
+                doc.fromHTML($('#getPdf').get(0), 20,20,{
+                'width':500});
                 doc.save(nome+'.pdf')
             }
         </script>

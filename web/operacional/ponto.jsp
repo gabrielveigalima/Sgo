@@ -171,7 +171,7 @@
         </div>
         <script language= "JavaScript">
             function abreVerPonto(idponto){
-                location.href='verPonto.jsp?id='+idponto;
+                location.href='verPonto.jsp?id='+idponto+'&nome='+nome;
             }
         </script>
 <c:import url="footer.jsp"></c:import>

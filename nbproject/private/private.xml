@@ -5,6 +5,7 @@
         <group>
             <file>file:/S:/sgo/src/java/controller/CtrlPonto.java</file>
             <file>file:/S:/sgo/src/java/DAO/PontoDAO.java</file>
+            <file>file:/S:/sgo/web/operacional/verPonto.jsp</file>
             <file>file:/S:/sgo/web/operacional/ponto.jsp</file>
             <file>file:/S:/sgo/web/index.jsp</file>
         </group>
